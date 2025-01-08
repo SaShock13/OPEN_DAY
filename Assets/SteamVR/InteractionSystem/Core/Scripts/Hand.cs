@@ -12,6 +12,8 @@ using System.Collections.ObjectModel;
 using UnityEngine.Events;
 using System.Threading;
 
+//Часы офсет установить к руке
+
 namespace Valve.VR.InteractionSystem
 {
     //-------------------------------------------------------------------------
@@ -360,6 +362,23 @@ namespace Valve.VR.InteractionSystem
         //-------------------------------------------------
         public void AttachObject(GameObject objectToAttach, GrabTypes grabbedWithType, AttachmentFlags flags = defaultAttachmentFlags, Transform attachmentOffset = null)
         {
+
+            //Попытка исправить блокирование поворота при взятии в правую руку.
+            //Как подсказал куратор, если я правильно понял, нужно сменить первую руку.
+            //Попробовал менять первую руку в листе рук playerа
+            //Теперь после отпускания предмета из правой руки повороты тоже прорадают.
+            //после взятия и отпускания в левую - снова поворачивается!!!!
+            //ИСправить!!!!
+
+            if (Player.instance.hands[0] != this)
+            {
+                var tempHand = Player.instance.hands[0];
+                Player.instance.hands[0] = this;
+                Player.instance.hands[1] = tempHand;
+            }
+
+
+
             AttachedObject attachedObject = new AttachedObject();
             attachedObject.attachmentFlags = flags;
             attachedObject.attachedOffsetTransform = attachmentOffset;

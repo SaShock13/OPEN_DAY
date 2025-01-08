@@ -116,8 +116,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHeatToFire: 200
   forcedIgnition: 0
-  heatingSpeed: 25
   fireTrigger: {fileID: 2259800676115202704}
+  burningTimeInSec: 10
+  burnedMaterial: {fileID: 2100000, guid: 0e09591299ac5214ea5ce8d1b56abac7, type: 2}
+  heatingSpeed: 25
   isOnFire: 0
   currentHeat: 0
 --- !u!23 &5384304645820225312

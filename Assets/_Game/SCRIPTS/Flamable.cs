@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Zenject;
 
 namespace Assets._Game.SCRIPTS
@@ -7,17 +8,22 @@ namespace Assets._Game.SCRIPTS
     {
         [SerializeField] float maxHeatToFire = 200;
         [SerializeField] private bool forcedIgnition = false;
-        public float heatingSpeed = 100;
         [SerializeField] private GameObject fireTrigger;
+        [SerializeField] private float burningTimeInSec;
+        [SerializeField] private Material burnedMaterial;
 
-
+        public float heatingSpeed = 100;
         public bool isOnFire = false;
+        private FireSpreading fireSpreading;
+        private bool isBurned = false;
         private ParticleSystem fireFX;
+        private Renderer meshRenderer;
         public float currentHeat;
 
         private void Start()
         {
             fireFX = GetComponentInChildren<ParticleSystem>();
+            meshRenderer = GetComponent<Renderer>();
             currentHeat = 0;
             if (fireTrigger!=null)
             {
@@ -26,16 +32,19 @@ namespace Assets._Game.SCRIPTS
         }
         private void Update()
         {
-            if (forcedIgnition) Heating();
-            CheckIfBurned();
+            if (!isBurned)
+            {
+                if (forcedIgnition) Heating(5);
+                CheckIfBurned(); 
+            }
         }
 
         
-        public void Heating() 
+        public void Heating(float coeff) 
         {            
-            if (!isOnFire)
+            if (!isOnFire & !isBurned)
             {
-                currentHeat += Time.deltaTime * heatingSpeed;
+                currentHeat += Time.deltaTime * heatingSpeed * coeff;
                 Debug.Log($"{gameObject.name} heat is {currentHeat}");
 
             }
@@ -44,15 +53,15 @@ namespace Assets._Game.SCRIPTS
 
         private void CheckIfBurned()
         {
-            if (!isOnFire)
+            if (!isOnFire & !isBurned)
             {
                 if (currentHeat >= maxHeatToFire)
                 {                   
                     fireFX.Play();
                     isOnFire = true;
                     forcedIgnition = false;
-
-                    gameObject.AddComponent<FireSpreading>();
+                    StartCoroutine(SetBurnedCoroutine());
+                    fireSpreading = gameObject.AddComponent<FireSpreading>();
                     if (fireTrigger != null)
                     {
                         fireTrigger.SetActive(true);
@@ -60,7 +69,15 @@ namespace Assets._Game.SCRIPTS
                     Debug.Log($"{gameObject.name} is on fire , Added FireSpreading");
                 } 
             }
+        }
 
+        IEnumerator SetBurnedCoroutine()
+        {
+            yield return new WaitForSeconds(burningTimeInSec);
+            meshRenderer.material = burnedMaterial;            
+            Destroy(fireSpreading);
+            fireFX.Stop();
+            isBurned = true;
         }
     }
 }

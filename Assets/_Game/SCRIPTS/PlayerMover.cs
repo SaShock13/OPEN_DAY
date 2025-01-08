@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Valve.VR.InteractionSystem;
 using Valve.VR;
@@ -6,6 +6,8 @@ using UnityEngine.Rendering;
 
 public class PlayerMover : MonoBehaviour
 {
+    // Руки трясутся при ходьбе. Исправить!
+
     [SerializeField] private SteamVR_Action_Vector2 leftJoystickInput;
     [SerializeField] private float moveSpeed = 0.5f;
     [SerializeField] private float vignetteCoeff = 0.5f;

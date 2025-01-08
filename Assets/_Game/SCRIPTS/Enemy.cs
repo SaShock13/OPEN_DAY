@@ -17,12 +17,14 @@ public enum EnemyBehState
 public class Enemy : MonoBehaviour
 {
     private Transform playerTransform;
+    private PlayerHealth playerHealth;
 
     [Inject]private Player player;
     private Animator animator;
     private NavMeshAgent agent;
     public bool isAlive = true;
     public bool isMovable = false;
+
 
     public float remDist;
     public EnemyBehState currentState;
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject enemyModelPrefab;
     [SerializeField] private GameObject enemyRagdollPrefab;
+    private EnemyAttack[] enemyAttacksArray;
     private GameObject currentModel;
     private EnemyRgdll currentRgdll;
     private Rigidbody[] rigidBodiesRagdoll;
@@ -50,11 +53,14 @@ public class Enemy : MonoBehaviour
             rb.isKinematic = true;
         }
         playerTransform = player.transform;
+        playerHealth = player.GetComponent<PlayerHealth>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         currentDestination = endTransform;
         stateHandler = GetComponent<EnemyStateHandler>();
         currentState = initialState;
+        enemyAttacksArray = GetComponentsInChildren<EnemyAttack>();
+        TurnAttackComponentsOff();
 
     }
 
@@ -62,6 +68,8 @@ public class Enemy : MonoBehaviour
     {
         currentRgdll = GetComponentInChildren<EnemyRgdll>();
         Debug.Log($"Ragdoll found = {currentRgdll != null}");
+
+        Debug.Log($"enemyAttacksArray Length {enemyAttacksArray.Length}");
     }
 
 
@@ -73,11 +81,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //public GameObject GetRagdoll()
-    //{
-    //    return currentRgdll;
-    //}
-
     private void Update()
     {
         if (isAlive)
@@ -86,12 +89,15 @@ public class Enemy : MonoBehaviour
             {
                 case EnemyBehState.Idle:
                     {
+                        TurnAttackComponentsOff();
                         ClearAnimationState();
                         animator.SetTrigger("Idle");
                         break;
                     }
                 case EnemyBehState.Wandering:
                     {
+                        TurnAttackComponentsOff();
+                        agent.isStopped = false;
                         animator.SetBool("Walk", true);
                         agent.destination = currentDestination.position;
                         stateHandler.StartCheck();
@@ -107,9 +113,11 @@ public class Enemy : MonoBehaviour
                     }
                 case EnemyBehState.Steering:
                     {
+                        agent.isStopped = false;
+                        TurnAttackComponentsOff();
                         animator.SetTrigger("Walk");
                         agent.destination = playerTransform.position;
-                        if (agent.remainingDistance <= agent.stoppingDistance + 0.02f)
+                        if (agent.remainingDistance <= agent.stoppingDistance + 0.02f & playerHealth.isAlive)
                         {
                             currentState = EnemyBehState.Attack;
                         }
@@ -117,16 +125,24 @@ public class Enemy : MonoBehaviour
                     }
                 case EnemyBehState.Attack:
                     {
+                        agent.isStopped = true; ;
+                        transform.rotation = Quaternion.LookRotation(playerTransform.position - transform.position, Vector3.up);
+                        TurnAttackComponentsOn();
                         animator.SetTrigger("Attack");
                         if (agent.remainingDistance > agent.stoppingDistance + 0.02f)
                         {
-                            currentState = EnemyBehState.Steering;
+                            if (playerHealth.isAlive)
+                            {
+                                currentState = EnemyBehState.Steering; 
+                            }
+                            else currentState = EnemyBehState.Wandering;
                         }
                         break;
                     }
 
                 case EnemyBehState.Death:
                     {
+                        TurnAttackComponentsOff();
                         ClearAnimationState();
                         Death();
                         break;
@@ -137,7 +153,6 @@ public class Enemy : MonoBehaviour
         else
         {
             agent.enabled = false;
-            //agent.isStopped = true;
         }
     }
 
@@ -146,20 +161,32 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Walk", false);
     }
 
+    private void TurnAttackComponentsOn()
+    {
+        for (int i = 0; i < enemyAttacksArray.Length; i++)
+        {
+            enemyAttacksArray[i].enabled = true;
+        }
+
+        Debug.Log($"TurnOn attack on length {enemyAttacksArray.Length}");
+    }
+
+    private void TurnAttackComponentsOff()
+    {
+        for (int i = 0; i < enemyAttacksArray.Length; i++)
+        {
+            enemyAttacksArray[i].enabled = false;
+        }
+    }
+
     private void Death()
     {
-        //currentModel.SetActive(false);
-        //currentRgdll.transform.position = transform.position;
-        //currentRgdll.transform.rotation = transform.rotation;
         foreach (var rb in rigidBodiesRagdoll)
         {
             rb.isKinematic = false;
         }
         animator.enabled = false;
-        //currentRgdll.SetActive(true);
         currentRgdll.StopConvulsing();
         isAlive = false;
-        //agent.enabled = false;
-        //gameObject.SetActive(false);
     }
 }

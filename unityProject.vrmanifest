@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.zombieslasher.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\UnityProjects\\OpenDay\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\UnityProjects\\OPEN_DAY\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "ZombieSlasher [Testing]"

@@ -13,15 +13,15 @@ public class PlayerHealthView : MonoBehaviour
     private Image heartedImage;
     private Color fxColor;
 
-    //[Inject]
-    //public void Construct(Player player)
-    //{
-    //    _player = player;
-    //}
+    [Inject]
+    public void Construct(Player player)
+    {
+        _player = player;
+    }
 
     private void Awake()
     {
-        //_health = _player.GetComponent<PlayerHealth>();
+        _health = _player.GetComponent<PlayerHealth>();
         heartedImage  = GetComponent<Image>();
     }
 
@@ -32,7 +32,7 @@ public class PlayerHealthView : MonoBehaviour
 
     //private void OnDisable()
     //{
-
+    //    _health.onHealthChanged -= HealthChanged();
     //}
 
     public void HealthChanged(float health,float maxHealth)

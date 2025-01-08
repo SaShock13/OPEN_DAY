@@ -8,6 +8,7 @@ public class FireSpreading : MonoBehaviour
 {
     private List<Flamable> flamablesList;
     private Flamable flamable = null;
+    public float flamableCoeff = 1f;
 
     private void Awake()
     {
@@ -37,7 +38,7 @@ public class FireSpreading : MonoBehaviour
         {
             foreach (var flamable in flamablesList)
             {
-                flamable.Heating();
+                flamable.Heating(flamableCoeff);
             }
         }
     }

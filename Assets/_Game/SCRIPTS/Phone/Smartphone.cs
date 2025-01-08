@@ -1,8 +1,10 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets._Game.SCRIPTS;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class Smartphone : MonoBehaviour
 {
@@ -16,7 +18,14 @@ public class Smartphone : MonoBehaviour
     [SerializeField] private GameObject callPanel;
 
     public PhoneStateMachineMono machineMono;
-    
+
+    private DialogUI _dialogUI;
+
+    [Inject]
+    public void Construct(DialogUI dialogUI)
+    {
+        _dialogUI = dialogUI;
+    }
 
     private void Start()
     {
@@ -35,6 +44,7 @@ public class Smartphone : MonoBehaviour
         if (!phoneSound.isPlaying)
         {
             phoneSound.Play();
+            
         }
     }
         
@@ -52,6 +62,7 @@ public class Smartphone : MonoBehaviour
         Debug.Log("Answer Call");
         callPanel.SetActive(true);
         phoneSound.clip = talkSound;
+        _dialogUI.AddMessageToDialog(new UIDialogMessage("Здесь, здесь происходит что-то странное, ты должен приехать за мной и забрать меняя отсюда", 20));
         phoneSound.Play();
     }
 

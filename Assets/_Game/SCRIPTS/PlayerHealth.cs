@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
+using Valve.VR.InteractionSystem;
+using Zenject;
 
 public class PlayerHealth : MonoBehaviour
 {
 
     private float health ;
-    private bool isAlive = true;
+    public bool isAlive = true;
     public UnityEvent<float,float> onHealthChanged;
     private Volume _volume;
     private Bloom _bloom;
@@ -18,6 +20,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float maxHealth = 1000;
     private float healingSpeed ;
     [SerializeField] float fullHealingTime = 100;
+    [SerializeField] private Transform respawnTransform;
+    private Player _player;
+
+    [Inject]
+    public void Construct(Player player)
+    {
+        _player = player;
+    }
 
     private void Awake()
     {
@@ -25,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
         health = maxHealth;
         healingSpeed = maxHealth/ fullHealingTime;
         _volume.profile.TryGet(out _bloom);
+        //player = GetComponent<Player>();
         
     }
     private void OnEnable()
@@ -36,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
     private void Update()
     {
         TestingDamage();
-        if(health<maxHealth)
+        if(health<maxHealth&health>0)
         {
             AutoHealing();
         }
@@ -83,6 +94,8 @@ public class PlayerHealth : MonoBehaviour
     {
         print("PLayer is dead!!");
         isAlive = false;
+        _player.transform.position = respawnTransform.position;
+        StartCoroutine(Respawn());
     }
 
     private IEnumerator Damage()
@@ -95,5 +108,13 @@ public class PlayerHealth : MonoBehaviour
         //damageEffect.SetActive(false);
         _bloom.active = false;
 
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(2);
+        
+        health = maxHealth;
+        isAlive = true;
     }
 }
