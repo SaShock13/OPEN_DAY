@@ -4,17 +4,32 @@ using Assets._Game.SCRIPTS;
 using TMPro;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
+using Zenject;
 
 public class DialogUI : MonoBehaviour
 {
     private TMP_Text dialogMessage;
     private bool isShowing = false;
+    private Canvas canvas;
+    private Player _player;
+
+    [Inject]
+    public void Construct(Player player)
+    {
+        _player = player;
+    }
+
+
     [SerializeField] private List<UIDialogMessage> messagesList = new List<UIDialogMessage>();
 
     private void Start()
     {
+        canvas = GetComponentInParent<Canvas>();
         dialogMessage = GetComponentInChildren<TMP_Text>();
         dialogMessage.enabled = false;
+        canvas.worldCamera = _player.GetComponentInChildren<Camera>();
+        canvas.planeDistance = 0.8f;
     }
 
     private void Update()

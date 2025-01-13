@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
         _volume = FindObjectOfType<Volume>();
         health = maxHealth;
         healingSpeed = maxHealth/ fullHealingTime;
-        _volume.profile.TryGet(out _bloom);
+        _volume?.profile.TryGet(out _bloom);
         //player = GetComponent<Player>();
         
     }

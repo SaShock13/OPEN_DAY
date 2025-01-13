@@ -12,6 +12,7 @@ namespace Assets._Game.SCRIPTS
         [SerializeField] private float burningTimeInSec;
         [SerializeField] private Material burnedMaterial;
 
+        public bool isMolotov = false;
         public float heatingSpeed = 100;
         public bool isOnFire = false;
         private FireSpreading fireSpreading;
@@ -55,18 +56,28 @@ namespace Assets._Game.SCRIPTS
         {
             if (!isOnFire & !isBurned)
             {
+
                 if (currentHeat >= maxHeatToFire)
-                {                   
-                    fireFX.Play();
-                    isOnFire = true;
-                    forcedIgnition = false;
-                    StartCoroutine(SetBurnedCoroutine());
-                    fireSpreading = gameObject.AddComponent<FireSpreading>();
-                    if (fireTrigger != null)
+                {
+                    if (isMolotov)
                     {
-                        fireTrigger.SetActive(true);
+                        var molotov = GetComponentInParent<Molotov>();
+                        molotov.SetActive();
+                        Debug.Log($"{molotov.name} Molotov Activated!!!");
                     }
-                    Debug.Log($"{gameObject.name} is on fire , Added FireSpreading");
+                    else
+                    {
+                        fireFX.Play();
+                        isOnFire = true;
+                        forcedIgnition = false;
+                        StartCoroutine(SetBurnedCoroutine());
+                        fireSpreading = gameObject.AddComponent<FireSpreading>();
+                        if (fireTrigger != null)
+                        {
+                            fireTrigger.SetActive(true);
+                        }
+                        Debug.Log($"{gameObject.name} is on fire , Added FireSpreading");
+                    }
                 } 
             }
         }
@@ -76,8 +87,11 @@ namespace Assets._Game.SCRIPTS
             yield return new WaitForSeconds(burningTimeInSec);
             meshRenderer.material = burnedMaterial;            
             Destroy(fireSpreading);
-            fireFX.Stop();
+            //fireFX.Stop();
+            Destroy(fireFX.gameObject);
+            Destroy(fireTrigger);
             isBurned = true;
+            Destroy(this);
         }
     }
 }

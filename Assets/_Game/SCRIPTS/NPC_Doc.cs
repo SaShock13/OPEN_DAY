@@ -14,10 +14,14 @@ public class NPC_Doc : MonoBehaviour
     [SerializeField] private float talkTimeInSeconds = 15;
     [SerializeField] private GameObject fireWater;
     [SerializeField] private int npcTalkPhase = 1;
-    
+    [SerializeField] private AudioClip talkPhase1;
+    [SerializeField] private AudioClip talkPhase2;
+    [SerializeField] private AudioClip talkPhase3;
+
     private Animator animator;
     private bool isTalking = false;
     private AudioSource talkSound;
+
     private DialogUI _dialogUI;
 
     [Inject]
@@ -30,6 +34,7 @@ public class NPC_Doc : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         talkSound = GetComponent<AudioSource>();
+        _dialogUI.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,11 +63,12 @@ public class NPC_Doc : MonoBehaviour
 
     IEnumerator TalkCoroutine()
     {
+        _dialogUI.gameObject.SetActive (true);
         isTalking = true;
+
         transform.rotation = Quaternion.LookRotation(Player.instance.transform.position - transform.position);
         Debug.Log($"Conversation with  {gameObject.name}");
         animator.SetBool("talking", isTalking);
-        talkSound.Play();
 
         switch (npcTalkPhase)
         {
@@ -79,16 +85,20 @@ public class NPC_Doc : MonoBehaviour
                 break;
         }
 
+        talkSound.Play();
+
         yield return new WaitForSeconds(talkTimeInSeconds);
         isTalking = false;
         animator.SetBool("talking", isTalking);
         talkSound.Stop();
+        _dialogUI.gameObject.SetActive(false);
         Debug.Log($"Conversation with  {gameObject.name} finished!!!");
     }
 
     private void TalkPhaseOne()
     {
-        talkTimeInSeconds = 15f;
+        talkSound.clip = talkPhase1;
+        talkTimeInSeconds = talkPhase1.length;
         _dialogUI.AddMessageToDialog(new UIDialogMessage("В одной из комнат я видел огромное существо, я пытался причинить ему вред - но всё оказалось бесполезно.", talkTimeInSeconds / 3));
         _dialogUI.AddMessageToDialog(new UIDialogMessage("Единственный вариант - это сжечь его. Если ты принесешь мне 5 канистр с горючими веществами и один баллон с кислородом, я сделаю зажигательную смесь , способную уничтожить всё, что угодно!!!", talkTimeInSeconds / 3));
         _dialogUI.AddMessageToDialog(new UIDialogMessage("Положи все на стол - и через пару минут заберешь готовую смертельную жижу!!!", talkTimeInSeconds / 3));
@@ -96,14 +106,16 @@ public class NPC_Doc : MonoBehaviour
 
     private void TalkPhaseTwo()
     {
-        talkTimeInSeconds = 5f;
+        talkSound.clip = talkPhase2;
+        talkTimeInSeconds = talkPhase2.length;
         _dialogUI.AddMessageToDialog(new UIDialogMessage("Отлично!! Дай мне пару минут , и я сделаю смертельную жижу!!!", talkTimeInSeconds ));    
         StartCoroutine(MakeFireWater());
     }
 
     private void TalkPhaseThree()
     {
-        talkTimeInSeconds = 5f;
+        talkSound.clip = talkPhase3;
+        talkTimeInSeconds = talkPhase3.length;
         _dialogUI.AddMessageToDialog(new UIDialogMessage("Готово! Можешь забрать на столе. Сожги этого мерзкого Жирдяя и сможешь спасти свою принцессу !!!", talkTimeInSeconds));
     }
 

@@ -10,11 +10,12 @@ public class Explosive : MonoBehaviour
     [SerializeField] private float radius = 10f;
     [SerializeField] private float force = 1000f;
     [SerializeField] private float upForce = 10;
-    [SerializeField] private float explosionDelay = 3f;
+    const float explosDelayDefault = 3f;
     private AudioSource explosionSound;
     private Collider[] collidersToExplode;
     private MeshRenderer meshRenderer;
     private EnemyHealth enemyHealth;
+    private NPCHealth npcHealth;
     public bool isExploding = false;
 
     private void Start()
@@ -63,6 +64,12 @@ public class Explosive : MonoBehaviour
                         {
                             enemyHealth.TakeDamage(1000);
                         }
+                        else 
+                        if (col.TryGetComponent<NPCHealth>(out npcHealth))
+                        {
+                            npcHealth.TakeDamage();
+                        }
+
 
                         StartCoroutine(ExplodeRagdoll(col));
                         }
@@ -74,9 +81,9 @@ public class Explosive : MonoBehaviour
         }
     }
 
-    public void ActivateGrenade()
+    public void ActivateGrenade(float explosionDelay = explosDelayDefault)
     {
-        StartCoroutine(ActivateGrenadeCoroutine());
+        StartCoroutine(ActivateGrenadeCoroutine(explosionDelay));
     }
 
     IEnumerator ExplodeRagdoll(Collider col)
@@ -88,9 +95,9 @@ public class Explosive : MonoBehaviour
         col.attachedRigidbody.AddExplosionForce(force, transform.position, radius, upForce);
     }
 
-    IEnumerator ActivateGrenadeCoroutine()
+    IEnumerator ActivateGrenadeCoroutine(float delay)
     {
-        yield return new WaitForSeconds(explosionDelay);
+        yield return new WaitForSeconds(delay);
         isExploding = true;
     }
 }

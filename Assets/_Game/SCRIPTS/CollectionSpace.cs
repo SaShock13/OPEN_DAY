@@ -27,18 +27,21 @@ public class CollectionSpace : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<FlamableMixComponent>(out flamableMixComponent))
+        if (!IsCompleted())
         {
-
-            Debug.Log($"Conponent {flamableMixComponent.id} is collected ");
-            flamableMixArray[flamableMixComponent.id] = flamableMixComponent;
-            if(IsCompleted())
+            if(other.TryGetComponent<FlamableMixComponent>(out flamableMixComponent))
             {
-                isQuestCompleted = true;
 
-                Debug.Log($"Quest completed");
-                nextPhaseEvent?.Invoke();
-                //EverythingIsOnFire();
+                    Debug.Log($"Conponent {flamableMixComponent.id} is collected ");
+                    flamableMixArray[flamableMixComponent.id] = flamableMixComponent;
+                    if (IsCompleted())
+                    {
+                        isQuestCompleted = true;
+
+                        Debug.Log($"Quest completed");
+                        nextPhaseEvent?.Invoke();
+                        //EverythingIsOnFire();
+                    } 
             }
         }
     }

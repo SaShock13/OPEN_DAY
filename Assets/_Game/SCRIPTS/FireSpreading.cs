@@ -20,11 +20,12 @@ public class FireSpreading : MonoBehaviour
         Debug.Log($"In Trigger : {other.name}");
         if (other.TryGetComponent<Flamable>(out flamable))
         {
+
+            Debug.Log($"Flammable founded {this}");
             if (!flamable.isOnFire)
             {
                 if (!flamablesList.Contains(flamable))
                 {
-                    flamable.heatingSpeed /= 2;
                     flamablesList.Add(flamable);
                     Debug.Log($"Added to list : {flamable.name}");
                 }

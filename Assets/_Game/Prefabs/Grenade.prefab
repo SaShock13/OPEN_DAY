@@ -56,7 +56,6 @@ MonoBehaviour:
   radius: 3
   force: 100
   upForce: 0.2
-  explosionDelay: 3
   isExploding: 0
 --- !u!114 &3738335530339509534
 MonoBehaviour:
@@ -190,12 +189,12 @@ MonoBehaviour:
       - m_Target: {fileID: 2328753862262573048}
         m_TargetAssemblyTypeName: Explosive, Assembly-CSharp
         m_MethodName: ActivateGrenade
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

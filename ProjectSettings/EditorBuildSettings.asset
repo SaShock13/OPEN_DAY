@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/MainScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/_Game/Scenes/TestScene.unity
+    guid: bfd28775f0b17684db5a7a53145c485b
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: d35c13a25800e9f4ea2725d11eb6d186,
       type: 2}

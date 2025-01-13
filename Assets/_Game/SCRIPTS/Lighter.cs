@@ -1,19 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR;
 
 public class Lighter : MonoBehaviour
 {
-
-    //todo Поправить работу зажигалки, при отпускании зажженой, остается огонь
-    //todo Поджиг идет только при вхождении, если уже в триггере зажигаешь не идет
-    //todo Скоротсть поджига уменьшается от каждой попытки!
     [SerializeField] private SteamVR_Action_Boolean grabAction;
+    [SerializeField] private Collider fireTrigger;
     private FireSpreading fireSpreading;
     private ParticleSystem FireFX;
     private int previousLayer;
     [SerializeField] private LayerMask targetLayer;
+
 
     /// <summary>
     /// çàæèãàëêà íå ææåò!!¨!
@@ -21,22 +17,19 @@ public class Lighter : MonoBehaviour
     private void Start()
     {
         FireFX = GetComponentInChildren<ParticleSystem>();
-        //fireSpreading = GetComponentInChildren<FireSpreading>();
-        //fireSpreading.enabled = false;
+        fireTrigger.enabled = false;
     }
 
     public void OnTake()
     {
         previousLayer = gameObject.layer;
-        print($"PrevLayer {previousLayer}");
-        print($"targetLayer {targetLayer}");
         gameObject.layer = 7;
-
     }
 
     public void OnDrop()
     {
         gameObject.layer = previousLayer;
+        TurnFireOff();
     }
 
     public void OnLighterHeld()
@@ -45,21 +38,30 @@ public class Lighter : MonoBehaviour
         {
             if (!FireFX.isPlaying)
             {
-                FireFX.Play();
-                fireSpreading = gameObject.AddComponent<FireSpreading>();
-                fireSpreading.flamableCoeff = 3f;
-                //fireSpreading.enabled = true;
+                LightTheLighter();
             }
         }
         else
         {
             if (FireFX.isPlaying)
             {
-                FireFX.Stop();
-                Destroy( fireSpreading );
-                //fireSpreading.enabled = false;
+                TurnFireOff();
             }
-            
         }
     }
+
+    private void TurnFireOff()
+    {
+        FireFX.Stop();
+        Destroy(fireSpreading);
+    }
+    
+    public void LightTheLighter()
+    {
+        FireFX.Play();
+        fireSpreading = gameObject.AddComponent<FireSpreading>();
+        fireTrigger.enabled = true;
+        fireSpreading.flamableCoeff = 6f;
+    }
+
 }

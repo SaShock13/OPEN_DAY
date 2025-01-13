@@ -26,6 +26,8 @@ public class CutScene : MonoBehaviour
     public void Construct(Player player,CarActivation carActivation)
     {
         _player = player;
+
+        Debug.Log($"Player injected in CarCutScene {this}");
         _carActivation = carActivation;
     }
 
@@ -65,8 +67,12 @@ public class CutScene : MonoBehaviour
 
     IEnumerator StartVideoCoroutine()
     {        
-        targetPlayerPosition = isPlayerAtHome?univerPlayerTransform.position:homePlayerTransform.position;        
+        targetPlayerPosition = isPlayerAtHome?univerPlayerTransform.position:homePlayerTransform.position;
+        _player.GetComponent<CharacterController>().enabled = false;
         _player.transform.position = targetPlayerPosition;
+        _player.GetComponent<CharacterController>().enabled = true;
+        //Player.instance.transform.position = targetPlayerPosition;
+        Debug.Log($"PLayer new position {_player.transform.position}");
         _carActivation.transform.position = targetPlayerPosition + carPositionOffset;
         isPlayerAtHome = !isPlayerAtHome;
         yield return new WaitForSeconds(cutSceneDuration);

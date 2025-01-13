@@ -10,7 +10,7 @@ public class SceneInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<Smartphone>().FromInstance(phone).AsSingle().NonLazy();
-        Container.Bind<CutScene>().FromInstance(cutScene).AsSingle();
+        Container.Bind<CutScene>().FromInstance(cutScene).AsSingle().NonLazy();
         Container.Bind<CarActivation>().FromInstance(carActivation).AsSingle();
         Container.Bind<DialogUI>().FromInstance(dialogUI).AsSingle();
     }
