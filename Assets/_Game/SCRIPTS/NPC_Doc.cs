@@ -11,7 +11,7 @@ public class NPC_Doc : MonoBehaviour
 {
     [SerializeField] UnityEvent makeFireWaterEvent;
     
-    [SerializeField] private float talkTimeInSeconds = 15;
+    private float talkTimeInSeconds = 15;
     [SerializeField] private GameObject fireWater;
     [SerializeField] private int npcTalkPhase = 1;
     [SerializeField] private AudioClip talkPhase1;
@@ -95,12 +95,15 @@ public class NPC_Doc : MonoBehaviour
         Debug.Log($"Conversation with  {gameObject.name} finished!!!");
     }
 
+
+    // todo текст после первой фазы остается третей части 1 фазы постоянно , а голос ok
+    // todo Доделать диалог после забора готовой жижи
     private void TalkPhaseOne()
     {
         talkSound.clip = talkPhase1;
         talkTimeInSeconds = talkPhase1.length;
-        _dialogUI.AddMessageToDialog(new UIDialogMessage("В одной из комнат я видел огромное существо, я пытался причинить ему вред - но всё оказалось бесполезно.", talkTimeInSeconds / 3));
-        _dialogUI.AddMessageToDialog(new UIDialogMessage("Единственный вариант - это сжечь его. Если ты принесешь мне 5 канистр с горючими веществами и один баллон с кислородом, я сделаю зажигательную смесь , способную уничтожить всё, что угодно!!!", talkTimeInSeconds / 3));
+        _dialogUI.AddMessageToDialog(new UIDialogMessage("В одной из комнат я видел огромное существо, я пытался причинить ему вред - но всё оказалось бесполезно. Единственный вариант - это сжечь его. ", talkTimeInSeconds / 3));
+        _dialogUI.AddMessageToDialog(new UIDialogMessage("Если ты принесешь мне 5 канистр с горючими веществами и один баллон с кислородом, я сделаю зажигательную смесь , способную уничтожить всё, что угодно!!!", talkTimeInSeconds / 3));
         _dialogUI.AddMessageToDialog(new UIDialogMessage("Положи все на стол - и через пару минут заберешь готовую смертельную жижу!!!", talkTimeInSeconds / 3));
     }
 

@@ -28,10 +28,16 @@ public class PhoneButton : MonoBehaviour
     {
         Debug.Log($"pushed button Answer ");
         _smartphone.machineMono.SetState<TalkState>();
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        onButtonClick.Invoke();
+
+        if (other.CompareTag("Hand"))
+        {
+            onButtonClick.Invoke(); 
+        }
     }
+
 }

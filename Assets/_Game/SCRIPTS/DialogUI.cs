@@ -20,8 +20,7 @@ public class DialogUI : MonoBehaviour
         _player = player;
     }
 
-
-    [SerializeField] private List<UIDialogMessage> messagesList = new List<UIDialogMessage>();
+    public List<UIDialogMessage> messagesList = new List<UIDialogMessage>();
 
     private void Start()
     {
@@ -44,8 +43,9 @@ public class DialogUI : MonoBehaviour
         }
         else
         {
-            dialogMessage.enabled = false;
+            dialogMessage.enabled = false;            
         }
+        
     }
 
     public void AddMessageToDialog(UIDialogMessage message)
@@ -77,7 +77,7 @@ public class DialogUI : MonoBehaviour
         dialogMessage.text = message.message;
         yield return new WaitForSeconds(message.showingTime);
         messagesList.Remove(message);
-        isShowing = false;
         Debug.Log($"Сообщений в очереди осталось {messagesList.Count}");
+        isShowing = false;
     }
 }

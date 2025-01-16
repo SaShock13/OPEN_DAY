@@ -7,7 +7,6 @@ public class MainMenu : MonoBehaviour
 {
 
     //TODO Часы показания жизней или время
-    // TODO Молотов увеличить размер и сделать взрывным.
     // TODO ?? Предмет поднимается на уровень рук при подходе игрока!
 
     [SerializeField] private GameObject aboutPanel;

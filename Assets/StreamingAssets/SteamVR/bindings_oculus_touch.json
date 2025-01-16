@@ -239,6 +239,15 @@
                },
                "mode" : "joystick",
                "path" : "/user/hand/left/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/inventory"
+                  }
+               },
+               "mode" : "toggle_button",
+               "path" : "/user/hand/left/input/x"
             }
          ]
       },

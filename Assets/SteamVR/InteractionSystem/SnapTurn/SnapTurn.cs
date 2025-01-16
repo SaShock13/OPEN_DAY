@@ -62,24 +62,32 @@ namespace Valve.VR.InteractionSystem
                 if (Time.time < (teleportLastActiveTime + canTurnEverySeconds))
                     return;
 
+
+                ///CHANGED BY BIZON63 : I belive, this check is not neccesary in my case. Let player be able to turn with anything in his hands!
                 // only allow snap turning when not holding something
 
-                bool rightHandValid = player.rightHand.currentAttachedObject == null ||
-                    (player.rightHand.currentAttachedObject != null
-                    && player.rightHand.currentAttachedTeleportManager != null
-                    && player.rightHand.currentAttachedTeleportManager.teleportAllowed);
+                //bool rightHandValid = player.rightHand.currentAttachedObject == null ||
+                //    (player.rightHand.currentAttachedObject != null
+                //    && player.rightHand.currentAttachedTeleportManager != null
+                //    && player.rightHand.currentAttachedTeleportManager.teleportAllowed);
 
-                bool leftHandValid = player.leftHand.currentAttachedObject == null ||
-                    (player.leftHand.currentAttachedObject != null
-                    && player.leftHand.currentAttachedTeleportManager != null
-                    && player.leftHand.currentAttachedTeleportManager.teleportAllowed);
+                //bool leftHandValid = player.leftHand.currentAttachedObject == null ||
+                //    (player.leftHand.currentAttachedObject != null
+                //    && player.leftHand.currentAttachedTeleportManager != null
+                //    && player.leftHand.currentAttachedTeleportManager.teleportAllowed);
+
+                //bool leftHandTurnLeft = snapLeftAction.GetStateDown(SteamVR_Input_Sources.LeftHand) && leftHandValid;
+                //bool rightHandTurnLeft = snapLeftAction.GetStateDown(SteamVR_Input_Sources.RightHand) && rightHandValid;
+
+                //bool leftHandTurnRight = snapRightAction.GetStateDown(SteamVR_Input_Sources.LeftHand) && leftHandValid;
+                //bool rightHandTurnRight = snapRightAction.GetStateDown(SteamVR_Input_Sources.RightHand) && rightHandValid;
 
 
-                bool leftHandTurnLeft = snapLeftAction.GetStateDown(SteamVR_Input_Sources.LeftHand) && leftHandValid;
-                bool rightHandTurnLeft = snapLeftAction.GetStateDown(SteamVR_Input_Sources.RightHand) && rightHandValid;
+                bool leftHandTurnLeft = snapLeftAction.GetStateDown(SteamVR_Input_Sources.LeftHand);
+                bool rightHandTurnLeft = snapLeftAction.GetStateDown(SteamVR_Input_Sources.RightHand) ;
 
-                bool leftHandTurnRight = snapRightAction.GetStateDown(SteamVR_Input_Sources.LeftHand) && leftHandValid;
-                bool rightHandTurnRight = snapRightAction.GetStateDown(SteamVR_Input_Sources.RightHand) && rightHandValid;
+                bool leftHandTurnRight = snapRightAction.GetStateDown(SteamVR_Input_Sources.LeftHand) ;
+                bool rightHandTurnRight = snapRightAction.GetStateDown(SteamVR_Input_Sources.RightHand);
 
                 if (leftHandTurnLeft || rightHandTurnLeft)
                 {

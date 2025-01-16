@@ -1012,8 +1012,8 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 1
   uiInteractAction:
-    actionPath: /actions/default/in/InteractUI
-    needsReinit: 1
+    actionPath: /actions/default/in/GrabPinch
+    needsReinit: 0
   useHoverSphere: 1
   hoverSphereTransform: {fileID: 0}
   hoverSphereRadius: 0.05
@@ -1130,8 +1130,8 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 1
   uiInteractAction:
-    actionPath: /actions/default/in/InteractUI
-    needsReinit: 1
+    actionPath: /actions/default/in/GrabPinch
+    needsReinit: 0
   useHoverSphere: 1
   hoverSphereTransform: {fileID: 4000012325712216}
   hoverSphereRadius: 0.075
@@ -1274,8 +1274,8 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 1
   uiInteractAction:
-    actionPath: /actions/default/in/InteractUI
-    needsReinit: 1
+    actionPath: /actions/default/in/GrabPinch
+    needsReinit: 0
   useHoverSphere: 1
   hoverSphereTransform: {fileID: 480432}
   hoverSphereRadius: 0.075
@@ -3384,42 +3384,42 @@ PrefabInstance:
     - target: {fileID: 898426015465750967, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2329034966591041180, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 41.971603
       objectReference: {fileID: 0}
     - target: {fileID: 2329034966591041180, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.258
+      value: -0.5056696
       objectReference: {fileID: 0}
     - target: {fileID: 2329034966591041180, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 18.138033
       objectReference: {fileID: 0}
     - target: {fileID: 2329034966591041180, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7421089
+      value: 0.6763317
       objectReference: {fileID: 0}
     - target: {fileID: 2329034966591041180, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.69003093
       objectReference: {fileID: 0}
     - target: {fileID: 2329034966591041180, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6702794
+      value: -0.2481436
       objectReference: {fileID: 0}
     - target: {fileID: 2329034966591041180, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.069695845
       objectReference: {fileID: 0}
     - target: {fileID: 2329034966591041180, guid: 84ead9e10c876f4419f39077039e0d41,
         type: 3}
@@ -3435,6 +3435,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526847779302144825, guid: 84ead9e10c876f4419f39077039e0d41,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526847779302144825, guid: 84ead9e10c876f4419f39077039e0d41,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526847779302144825, guid: 84ead9e10c876f4419f39077039e0d41,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
