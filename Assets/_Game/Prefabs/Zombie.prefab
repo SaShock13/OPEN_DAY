@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3011149501863953253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.13, y: 0.1, z: 0.63}
+  m_LocalPosition: {x: -3.51, y: 0.1, z: 0.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,9 +46,9 @@ GameObject:
   - component: {fileID: 4889752312171025601}
   - component: {fileID: 2973383771028675283}
   - component: {fileID: 2398989031415848036}
-  - component: {fileID: 8667648910819042522}
+  - component: {fileID: 4507253068977967511}
   m_Layer: 0
-  m_Name: ZombieObj
+  m_Name: KidObj
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a83d9186894ac4dad69d5efe5fc380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testTargetTransform: {fileID: 0}
   isAlive: 1
   isMovable: 0
   remDist: 0
@@ -125,7 +126,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.2
-  m_Speed: 0.4
+  m_Speed: 0.5
   m_Acceleration: 3.89
   avoidancePriority: 50
   m_AngularSpeed: 600
@@ -149,9 +150,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6622880c94f54b44d84ee91c56b1272e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 765
+  health: 457
+  damageModifier: 1
   bloodSprite: {fileID: 1724139830389362106, guid: 2239a3fe5b1cf5a409120e3087797f73,
     type: 3}
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  hitSound: {fileID: 8300000, guid: 7cd342ae3711fd84ba0f612d395105d7, type: 3}
+  deathSound: {fileID: 8300000, guid: 9ec6456f84a75e04a885d165eaf31ec1, type: 3}
 --- !u!54 &2973383771028675283
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191,16 +198,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff4e1a9473a59e4db68a84d6b42fd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightDistance: 10
-  attackDistance: 0.5
+  sightDistance: 7
+  attackDistance: 1
   checkSightInterval: 0.5
+  testTarget: {fileID: 0}
+  currentTarget: {fileID: 0}
   onPlayerInSight:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8681003121516368984}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: SetState
-        m_Mode: 0
+        m_MethodName: SetSteering
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -214,8 +223,38 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8681003121516368984}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: SetState
-        m_Mode: 0
+        m_MethodName: SetAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPlayerOutOFSight:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8681003121516368984}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: SetWandering
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPlayerOutOfAttackDistance:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8681003121516368984}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: SetSteering
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -226,19 +265,104 @@ MonoBehaviour:
         m_CallState: 2
   isNeedToCheck: 0
   isPlayerInView: 0
-  distanceToPlayer: 0
---- !u!114 &8667648910819042522
-MonoBehaviour:
+  isPlayerInAttackDistance: 0
+  distanceToTarget: 0
+--- !u!82 &4507253068977967511
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6889320598319914521}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f385fe9463f044a46923ef51dd611334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7919963979328031915
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +389,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -20.24, y: 0.216, z: -7.66}
-  m_LocalScale: {x: 0.73, y: 0.73, z: 0.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8939823975960653465}
@@ -298,7 +422,7 @@ Transform:
   m_GameObject: {fileID: 8650783241593998537}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.58, y: 0.246, z: -7.403}
+  m_LocalPosition: {x: 9.22, y: 0.246, z: 0.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,32 +1,62 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 /// <summary>
-/// Скрипт универсальный, для любого предмета, способного нанести урон врагам. Считывает ускорение коллайдера, 
-/// и пропорцианально нему пркладывает урон к врагу!
+/// Г‘ГЄГ°ГЁГЇГІ ГіГ­ГЁГўГҐГ°Г±Г Г«ГјГ­Г»Г©, Г¤Г«Гї Г«ГѕГЎГ®ГЈГ® ГЇГ°ГҐГ¤Г¬ГҐГІГ , Г±ГЇГ®Г±Г®ГЎГ­Г®ГЈГ® Г­Г Г­ГҐГ±ГІГЁ ГіГ°Г®Г­ ГўГ°Г ГЈГ Г¬. Г‘Г·ГЁГІГ»ГўГ ГҐГІ ГіГ±ГЄГ®Г°ГҐГ­ГЁГҐ ГЄГ®Г«Г«Г Г©Г¤ГҐГ°Г , 
+/// ГЁ ГЇГ°Г®ГЇГ®Г°Г¶ГЁГ Г­Г Г«ГјГ­Г® Г­ГҐГ¬Гі ГЇГ°ГЄГ«Г Г¤Г»ГўГ ГҐГІ ГіГ°Г®Г­ ГЄ ГўГ°Г ГЈГі!
 /// </summary>
 public class DamageMaker : MonoBehaviour
 {
-    Rigidbody rb;
+    private Rigidbody rigidBody;
     [SerializeField] float damageMuliplyer = 2;
+    private bool isInHand = false;
+    private bool stillCanDamage = false;
+    [Range(0f, 2f)]
+    public float minDamageVelocity = 0.2f;
+    private LayerMask layer;
+    private float damageLongerAmount = 1.5f; // РІСЂРµРјСЏ РїРѕСЃР»Рµ Р±СЂРѕСЃРєР°, РєРѕС‚РѕСЂРѕРµ РїСЂРµРґРјРµС‚ РјРѕР¶РµС‚ РґР°РјР°Р¶РёС‚СЊ
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
+
+        if (isInHand || (stillCanDamage && rigidBody.velocity.magnitude > minDamageVelocity ))
         {
-            
-            float damage = rb.velocity.magnitude * damageMuliplyer;
-            print($"Ускорение RB составило : {rb.velocity.magnitude}");
-            print($"Урон врагу составил : {damage}");
-            enemyHealth.TakeDamage((int)damage);
+            if (collision.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
+            {
+
+                float damage = rigidBody.velocity.magnitude * damageMuliplyer;
+                print($"РЈСЃРєРѕСЂРµРЅРёРµ damageMaker : {rigidBody.velocity.magnitude}");
+                print($"РЈСЂРѕРЅ  damageMaker : {damage}");
+                enemyHealth.TakeDamage((int)damage);
+            } 
         }
     }
+
+    public void setInHand()
+    {
+        isInHand = true;
+        
+        gameObject.layer = LayerMask.NameToLayer("Weapons");
+    }
+    public void setNotInHand()
+    {
+        isInHand = false;
+        stillCanDamage = true;
+        StartCoroutine(DamageLongerCoroutine());
+        gameObject.layer = LayerMask.NameToLayer("Environment");
+    }
+
+    IEnumerator DamageLongerCoroutine() // РїСЂРѕРґР»РµРЅРёРµ РґР°РјР°РіР° РїСЂРµРґРјРµС‚РѕРј РїРѕСЃР»Рµ Р±СЂРѕСЃРєР°
+    { 
+        yield return new WaitForSeconds(damageLongerAmount);
+        stillCanDamage = false;
+    }
+
 }

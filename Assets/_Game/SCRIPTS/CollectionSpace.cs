@@ -10,6 +10,8 @@ public class CollectionSpace : MonoBehaviour
     bool isQuestCompleted = false;
     private DialogUI _dialogUI;
     [SerializeField] UnityEvent nextPhaseEvent;
+    [SerializeField] UnityEvent onComponentAdded;
+
 
     [Inject]
     public void Construct(DialogUI dialogUI)
@@ -32,16 +34,15 @@ public class CollectionSpace : MonoBehaviour
             if(other.TryGetComponent<FlamableMixComponent>(out flamableMixComponent))
             {
 
-                    Debug.Log($"Conponent {flamableMixComponent.id} is collected ");
-                    flamableMixArray[flamableMixComponent.id] = flamableMixComponent;
-                    if (IsCompleted())
-                    {
-                        isQuestCompleted = true;
+                Debug.Log($"Conponent {flamableMixComponent.id} is collected ");
+                flamableMixArray[flamableMixComponent.id] = flamableMixComponent;
+                if (IsCompleted())
+                {
+                    isQuestCompleted = true;
 
-                        Debug.Log($"Quest completed");
-                        nextPhaseEvent?.Invoke();
-                        //EverythingIsOnFire();
-                    } 
+                    Debug.Log($"Quest completed");
+                    nextPhaseEvent?.Invoke();
+                } else onComponentAdded?.Invoke();
             }
         }
     }
@@ -58,11 +59,6 @@ public class CollectionSpace : MonoBehaviour
             }
         }
         return true;
-    }
-
-    private void EverythingIsOnFire()
-    {
-        _dialogUI.AddMessageToDialog(new UIDialogMessage("Вещества загораются, занимаются стены, потолок , мебель, и сгорает всё здание до тла. Это конец !!!", 50));
     }
 
     public void DestroyFlamableComponents()

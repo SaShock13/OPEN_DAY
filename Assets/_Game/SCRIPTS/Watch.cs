@@ -1,19 +1,77 @@
+п»їusing System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
+using Zenject;
 
 public class Watch : MonoBehaviour
 {
+
+    // todo РЅР° rendermodel РЅРµ РѕР±РЅРѕРІР»СЏСЋС‚СЃСЏ РїРѕРєР°Р·Р°РЅРёСЏ
     [SerializeField] TMP_Text livesText;
 
+    private Player _player;
+    private PlayerHealth playerHealth;
+
+
+    [Inject]
+    public void Construct(Player player)
+    {
+        //_player = player;
+        //playerHealth = _player.GetComponent<PlayerHealth>();
+        //playerHealth.onHealthChanged.AddListener(UpdateLives);
+
+        Debug.Log($"Inject to Watch Func OK {this}");
+    }
+
+    private void OnEnable()
+    {
+        //playerHealth.onHealthChanged.AddListener(UpdateLives);
+    }
+
+
+    private void Awake()
+    {
+        //_player = GetComponentInParent<Player>(true);
+
+        //playerHealth = _player.GetComponent<PlayerHealth>();
+
+        
+
+        Debug.Log($"watch awake with {playerHealth} !!!!");
+
+    }
+
+    private IEnumerator Start()
+    {
+        while (true)
+        {
+            UpdateTime();
+            yield return new WaitForSeconds(1); 
+        }
+    }
 
     /// <summary>
-    /// Есть сомнения ,что скрипт префаба руки привяжется к событию 
+    /// Г…Г±ГІГј Г±Г®Г¬Г­ГҐГ­ГЁГї ,Г·ГІГ® Г±ГЄГ°ГЁГЇГІ ГЇГ°ГҐГґГ ГЎГ  Г°ГіГЄГЁ ГЇГ°ГЁГўГїГ¦ГҐГІГ±Гї ГЄ Г±Г®ГЎГ»ГІГЁГѕ 
     /// </summary>
-    
+
     public void UpdateLives(float health,float maxHealth)
     {
-        livesText.text = ((int)health).ToString();
+        //livesText.text = ((int)health).ToString();
+        
+
+        //Debug.Log($"Update watch Health {health}");
+    }
+
+    private void UpdateTime()
+    {
+        livesText.text = DateTime.Now.ToString("T");
+    }
+
+    private void OnDisable()
+    {
+        //playerHealth.onHealthChanged.RemoveListener(UpdateLives);
     }
 }

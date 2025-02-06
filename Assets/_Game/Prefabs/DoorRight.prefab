@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3376614069078176599}
   - component: {fileID: 457727676683448810}
   - component: {fileID: 6567346802582589479}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,12 +224,12 @@ GameObject:
   - component: {fileID: 2487000775738195996}
   - component: {fileID: 3848866257989028188}
   - component: {fileID: 4797534039420765343}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoorPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &5172895055789482362
 Transform:
@@ -267,16 +267,16 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5569229879000963924, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
-  - {fileID: -8874429543870168535, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
-  - {fileID: -3607115817132452275, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
+  - {fileID: 2100000, guid: e1f8bd1297dc28d4582e5a218dcbc3dc, type: 2}
+  - {fileID: 2100000, guid: ad35b241b53c00047ad892e4971a0f2b, type: 2}
+  - {fileID: 2100000, guid: ad35b241b53c00047ad892e4971a0f2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -344,7 +344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8111169609080051293}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoorRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 835385990526357680}
   - component: {fileID: 198258986798280956}
   - component: {fileID: 3862264401769824209}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PLane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,6 +528,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb90ed12c60570342886b64b59bd0296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  codeLocked: 0
+  doorMaxAngle: 165
+  unlockAudioClip: {fileID: 0}
+  lockedAudioClip: {fileID: 0}
 --- !u!1 &8345642148988262752
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,12 +543,12 @@ GameObject:
   - component: {fileID: 298950062567102324}
   - component: {fileID: 189439926580493745}
   - component: {fileID: 4477242550807503847}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoorHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &298950062567102324
 Transform:
@@ -583,14 +587,14 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3607115817132452275, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
+  - {fileID: 2100000, guid: ad35b241b53c00047ad892e4971a0f2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -623,12 +627,12 @@ GameObject:
   - component: {fileID: 5454231113813474969}
   - component: {fileID: 6655104568184645743}
   - component: {fileID: 8096274928483901250}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoorFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &5454231113813474969
 Transform:
@@ -666,14 +670,14 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5569229879000963924, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
+  - {fileID: 2100000, guid: e1f8bd1297dc28d4582e5a218dcbc3dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

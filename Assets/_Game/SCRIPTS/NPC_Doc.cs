@@ -17,6 +17,7 @@ public class NPC_Doc : MonoBehaviour
     [SerializeField] private AudioClip talkPhase1;
     [SerializeField] private AudioClip talkPhase2;
     [SerializeField] private AudioClip talkPhase3;
+    [SerializeField] private AudioClip needMoreSoundClip;
 
     private Animator animator;
     private bool isTalking = false;
@@ -134,6 +135,24 @@ public class NPC_Doc : MonoBehaviour
     {
         npcTalkPhase++;
         if (npcTalkPhase > 3) npcTalkPhase = 3;
+    }
+
+    public void INeedMore()
+    {
+        if (needMoreSoundClip!= null)
+        {
+            talkSound.clip = needMoreSoundClip;
+            animator.SetBool("talking",true);
+            StartCoroutine(INeedMoreCoroutine());
+            talkSound.Play(); 
+        }
+        Debug.Log($"Отлично, но нужно еще !!!! {this}");
+    }
+
+    IEnumerator INeedMoreCoroutine()
+    {
+        yield return new WaitForSeconds(needMoreSoundClip.length);
+        animator.SetBool("talking", false);
     }
 
 }

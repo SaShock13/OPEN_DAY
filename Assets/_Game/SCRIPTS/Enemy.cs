@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,10 +16,13 @@ public enum EnemyBehState
 
 public class Enemy : MonoBehaviour
 {
+    //todo переделать поведение
     private Transform playerTransform;
+    [SerializeField] Transform testTargetTransform;
+    private Transform currentTargetTransform;
     private PlayerHealth playerHealth;
 
-    [Inject]private Player player;
+    private Player _player;
     private Animator animator;
     private NavMeshAgent agent;
     public bool isAlive = true;
@@ -34,7 +37,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform endTransform;
 
     private Transform currentDestination;
-    private EnemyStateHandler stateHandler;
+    private EnemySight stateHandler;
 
     [SerializeField] private GameObject enemyModelPrefab;
     [SerializeField] private GameObject enemyRagdollPrefab;
@@ -42,6 +45,13 @@ public class Enemy : MonoBehaviour
     private GameObject currentModel;
     private EnemyRgdll currentRgdll;
     private Rigidbody[] rigidBodiesRagdoll;
+
+
+    [Inject]
+    public void Construct(Player player)
+    {
+        _player = player;
+    }
 
 
     private void Awake()
@@ -52,15 +62,17 @@ public class Enemy : MonoBehaviour
         {
             rb.isKinematic = true;
         }
-        playerTransform = player.transform;
-        playerHealth = player.GetComponent<PlayerHealth>();
+        playerTransform = _player.transform;
+        playerHealth = _player.GetComponent<PlayerHealth>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         currentDestination = endTransform;
-        stateHandler = GetComponent<EnemyStateHandler>();
+        stateHandler = GetComponent<EnemySight>();
         currentState = initialState;
         enemyAttacksArray = GetComponentsInChildren<EnemyAttack>();
         TurnAttackComponentsOff();
+        //currentTargetTransform = defaulTargetTransform ;
+        currentTargetTransform = testTargetTransform != null ? testTargetTransform : playerTransform;
 
     }
 
@@ -81,6 +93,28 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void SetSteering()
+    {
+        SetState(EnemyBehState.Steering);
+    }
+    public void SetIddle()
+    {
+        SetState(EnemyBehState.Idle);
+    }
+    public void SetWandering()
+    {
+        SetState(EnemyBehState.Wandering);
+    }
+    public void SetAttack()
+    {
+        SetState(EnemyBehState.Attack);
+    }
+    public void SetDeath()
+    {
+        SetState(EnemyBehState.Death);
+    }
+
+
     private void Update()
     {
         if (isAlive)
@@ -98,6 +132,7 @@ public class Enemy : MonoBehaviour
                     {
                         TurnAttackComponentsOff();
                         agent.isStopped = false;
+                        animator.SetBool("Attack",false);
                         animator.SetBool("Walk", true);
                         agent.destination = currentDestination.position;
                         stateHandler.StartCheck();
@@ -113,22 +148,24 @@ public class Enemy : MonoBehaviour
                     }
                 case EnemyBehState.Steering:
                     {
+                        animator.SetBool("Attack", false);
+                        animator.SetBool("Walk", true);
                         agent.isStopped = false;
                         TurnAttackComponentsOff();
-                        animator.SetTrigger("Walk");
-                        agent.destination = playerTransform.position;
-                        if (agent.remainingDistance <= agent.stoppingDistance + 0.02f & playerHealth.isAlive)
-                        {
-                            currentState = EnemyBehState.Attack;
-                        }
+                        agent.destination = currentTargetTransform.position;
+                        //if (agent.remainingDistance <= agent.stoppingDistance  & playerHealth.isAlive)
+                        //{
+                        //    currentState = EnemyBehState.Attack;
+                        //}
                         break;
                     }
                 case EnemyBehState.Attack:
                     {
-                        agent.isStopped = true; ;
-                        transform.rotation = Quaternion.LookRotation(playerTransform.position - transform.position, Vector3.up);
-                        TurnAttackComponentsOn();
-                        animator.SetTrigger("Attack");
+                        agent.isStopped = true; 
+                        transform.rotation = Quaternion.LookRotation(new Vector3(currentTargetTransform.position.x, transform.position.y, currentTargetTransform.position.z) - transform.position, Vector3.up);
+                        //TurnAttackComponentsOn();
+                        animator.SetBool("Walk", false);
+                        animator.SetBool("Attack",true);
                         if (agent.remainingDistance > agent.stoppingDistance + 0.02f)
                         {
                             if (playerHealth.isAlive)

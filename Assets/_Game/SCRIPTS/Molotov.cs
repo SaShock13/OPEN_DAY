@@ -20,7 +20,7 @@ public class Molotov : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E) ) // FOR TEST
+        if (Input.GetKeyDown(KeyCode.T) ) // FOR TEST
         { 
             SetActive(); 
         }

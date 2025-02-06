@@ -27,7 +27,6 @@ public class Chainsaw : MonoBehaviour
     }
     public void OnDetach()
     {
-        
         sawSoundSource.Stop();
         animator.SetBool("Working", false);
     }

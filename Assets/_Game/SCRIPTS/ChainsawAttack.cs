@@ -51,7 +51,7 @@ public class ChainsawAttack : MonoBehaviour
     {
         while (true)
         {
-            enemyHealth.TakeDamage(50); 
+            enemyHealth.TakeDamage(100); 
             yield return new WaitForSeconds(1);
         }
     }

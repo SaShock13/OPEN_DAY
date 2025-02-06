@@ -15,6 +15,8 @@ public class GunFire : MonoBehaviour
     [SerializeField] private Transform shotAim;
     [SerializeField] AudioSource shotSound;
     [SerializeField] GameObject hitEffect;
+    [SerializeField] private LayerMask hitLayerMask;
+    [SerializeField] private int damage = 250;
     private ParticleSystem shotFx;
 
     [SerializeField] SteamVR_Action_Boolean fireAction;
@@ -59,14 +61,14 @@ public class GunFire : MonoBehaviour
                 StartCoroutine(nameof(DeathBloom));
             }
 
-            if (hit.transform.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health))
+            if (hit.transform.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth health) || hit.collider.CompareTag("Boss"))
             {
                 if (hit.collider.CompareTag("Head"))
                 {
-                    health.TakeDamage(200);
+                    health.TakeDamage(damage * 2);
                     print("Headshot");
                 }
-                else health.TakeDamage(35);
+                else health.TakeDamage(damage);
             }
         }
     }

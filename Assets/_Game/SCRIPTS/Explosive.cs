@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Assets._Game.SCRIPTS;
 using UnityEngine;
 
 public class Explosive : MonoBehaviour
@@ -10,13 +11,16 @@ public class Explosive : MonoBehaviour
     [SerializeField] private float radius = 10f;
     [SerializeField] private float force = 1000f;
     [SerializeField] private float upForce = 10;
+    [SerializeField] bool isThisBurning = false;
     const float explosDelayDefault = 3f;
     private AudioSource explosionSound;
     private Collider[] collidersToExplode;
     private MeshRenderer meshRenderer;
     private EnemyHealth enemyHealth;
     private NPCHealth npcHealth;
+    private Burnable bossBurnable;
     public bool isExploding = false;
+
 
     private void Start()
     {
@@ -59,8 +63,26 @@ public class Explosive : MonoBehaviour
                 foreach (Collider col in collidersToExplode)
                 {
                     if(col.attachedRigidbody!=null)
-                    { 
-                        if(col.TryGetComponent<EnemyHealth>(out enemyHealth))
+                    {
+                        if (isThisBurning )
+                        {
+                            Flamable flamable;
+                            if (col.TryGetComponent<Flamable>(out flamable)) //todo мгновеннное возгарание сделать
+                            {
+                                flamable.Heating(20000);
+                            }
+                            else
+                            {
+                                bossBurnable = col.GetComponentInChildren<Burnable>();
+                                if (bossBurnable != null)
+                                {
+                                    bossBurnable.BurnTheBoss();
+                                }
+                            }
+
+                            
+                        } else
+                        if (col.TryGetComponent<EnemyHealth>(out enemyHealth))
                         {
                             enemyHealth.TakeDamage(1000);
                         }
@@ -72,7 +94,7 @@ public class Explosive : MonoBehaviour
 
 
                         StartCoroutine(ExplodeRagdoll(col));
-                        }
+                    }
                 }
             }
             else Debug.Log("Nothing to explode");

@@ -229,7 +229,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &7962221563658724718
 Transform:
@@ -267,16 +267,16 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5569229879000963924, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
-  - {fileID: -8874429543870168535, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
-  - {fileID: -3607115817132452275, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
+  - {fileID: 2100000, guid: e1f8bd1297dc28d4582e5a218dcbc3dc, type: 2}
+  - {fileID: 2100000, guid: ad35b241b53c00047ad892e4971a0f2b, type: 2}
+  - {fileID: 2100000, guid: ad35b241b53c00047ad892e4971a0f2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -384,7 +384,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &3769712199315199074
 Transform:
@@ -422,14 +422,14 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5569229879000963924, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
+  - {fileID: 2100000, guid: e1f8bd1297dc28d4582e5a218dcbc3dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -467,7 +467,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &8088859289047113630
 Transform:
@@ -506,14 +506,14 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3607115817132452275, guid: 630879b42bc2e7d49a775a3aa70e5be5, type: 3}
+  - {fileID: 2100000, guid: ad35b241b53c00047ad892e4971a0f2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb90ed12c60570342886b64b59bd0296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codeLocked: 1
+  codeLocked: 0
   doorMaxAngle: 165
   unlockAudioClip: {fileID: 0}
   lockedAudioClip: {fileID: 0}

@@ -11,14 +11,14 @@ public class DoorLocker : MonoBehaviour
     private void Start()
     {
         renderer = GetComponentInChildren<Renderer>();
-        DoorLockEvent.Invoke();
+        DoorLockEvent?.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CodeCard"))
         {
-            DoorUnlockEvent.Invoke(); 
+            DoorUnlockEvent?.Invoke(); 
             renderer.material.color = unlockedColor;
         }
     }

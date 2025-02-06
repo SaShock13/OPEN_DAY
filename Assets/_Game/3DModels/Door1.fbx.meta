@@ -3,7 +3,22 @@ guid: 630879b42bc2e7d49a775a3aa70e5be5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BrownMetsl
+    second: {fileID: 2100000, guid: 7472b421c9564694db01e4b650a3aaa9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glossy.001
+    second: {fileID: 2100000, guid: 18eefc7830c4643449e4d1f7202fb5b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glossy_Reflexion.jpg
+    second: {fileID: 2100000, guid: 441bc685d54742345a38c3e759a2fa12, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

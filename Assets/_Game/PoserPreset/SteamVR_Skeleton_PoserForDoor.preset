@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SteamVR_Skeleton_PoserForDoor
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: poseEditorExpanded
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: blendEditorExpanded
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: poseNames.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: poseNames.Array.data[0]
+    value: DoorPose (MAIN)
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: overridePreviewLeftHandPrefab
+    value: 
+    objectReference: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: overridePreviewRightHandPrefab
+    value: 
+    objectReference: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: skeletonMainPose
+    value: 
+    objectReference: {fileID: 11400000, guid: 4f0c24b3eb53b714e8c1b7c5270846da, type: 2}
+  - target: {fileID: 0}
+    propertyPath: skeletonAdditionalPoses.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: showLeftPreview
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: showRightPreview
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: previewLeftInstance
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: previewRightInstance
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: previewPoseSelection
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: blendingBehaviours.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: scale
+    value: 1
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

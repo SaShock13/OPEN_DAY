@@ -21,6 +21,8 @@ namespace Assets._Game.SCRIPTS
         private Renderer meshRenderer;
         public float currentHeat;
 
+
+        
         private void Start()
         {
             fireFX = GetComponentInChildren<ParticleSystem>();
@@ -48,8 +50,8 @@ namespace Assets._Game.SCRIPTS
                 currentHeat += Time.deltaTime * heatingSpeed * coeff;
                 Debug.Log($"{gameObject.name} heat is {currentHeat}");
 
+                Debug.Log($"CurrenHeat: {currentHeat}");
             }
-            Debug.Log($"CurrenHeat: {currentHeat}");
         }
 
         private void CheckIfBurned()

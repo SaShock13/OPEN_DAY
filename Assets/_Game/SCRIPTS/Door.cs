@@ -9,6 +9,7 @@ public class Door : MonoBehaviour
     [SerializeField] private bool codeLocked = false; // для полного блокирования/разблокирования двери кодом или картой и т.д.
     private CircularDrive circularDrive;
     [SerializeField] private float doorMaxAngle = 165;
+    private float lockDoorAngle = 1;
     private float doorRotationPlay = 0.5f;
     private AudioSource lockSound;
     [SerializeField] AudioClip unlockAudioClip;
@@ -20,6 +21,10 @@ public class Door : MonoBehaviour
         doorCollider = GetComponent<SphereCollider>();
         circularDrive = GetComponent<CircularDrive>();
         lockSound = GetComponent<AudioSource>();
+        if(codeLocked)
+        {
+            circularDrive.maxAngle = lockDoorAngle;
+        }
     }
 
     //private void Update()

@@ -9,19 +9,28 @@ using Zenject;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] float fullHealingTime = 100;
+    [SerializeField] private float maxHealth = 1000;
+    [SerializeField] private AudioClip heartedSound;
+    [SerializeField] private AudioClip deathSound;
 
-    private float health ;
+    private Transform afterDeathRespawnTransform;
+
     public bool isAlive = true;
+
     public UnityEvent<float,float> onHealthChanged;
+    public UnityEvent onDeath;
+    public UnityEvent onRebirth;
+
+
+    public float health ;
+    private bool isHealing = false;
+    private float healingSpeed ;
     private Volume _volume;
     private Bloom _bloom;
-    private bool isHealing = false;
-    //[SerializeField] GameObject damageEffect;
-    [SerializeField] private float maxHealth = 1000;
-    private float healingSpeed ;
-    [SerializeField] float fullHealingTime = 100;
-    [SerializeField] private Transform respawnTransform;
     private Player _player;
+    private CharacterController _characterController;
+    private AudioSource _audioSource;
 
     [Inject]
     public void Construct(Player player)
@@ -31,25 +40,29 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+        afterDeathRespawnTransform = GameObject.Find("PLayerRespawn").transform;
         _volume = FindObjectOfType<Volume>();
         health = maxHealth;
         healingSpeed = maxHealth/ fullHealingTime;
         _volume?.profile.TryGet(out _bloom);
-        //player = GetComponent<Player>();
+        _characterController = GetComponent<CharacterController>();
+        _audioSource = GetComponent<AudioSource>();
         
     }
-    private void OnEnable()
+
+    private void Start()
     {
         onHealthChanged?.Invoke(health, maxHealth);
+        
     }
 
-    
+
     private void Update()
     {
         TestingDamage();
         if(health<maxHealth&health>0)
         {
-            AutoHealing();
+            //AutoHealing();
         }
     }
 
@@ -57,7 +70,8 @@ public class PlayerHealth : MonoBehaviour
     {
         health += 1*Time.deltaTime*healingSpeed;
 
-        onHealthChanged?.Invoke(health,maxHealth);            
+        onHealthChanged?.Invoke(health,maxHealth);
+        Debug.Log($"Player Healed to : {health}");
     }
 
     /// <summary>
@@ -67,20 +81,22 @@ public class PlayerHealth : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage(100);
+            TakeDamage(100,this.gameObject);
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, GameObject damager)
     {
         if (isAlive)
         {
             if (damage > 0)
             {
+
                 health -= damage;
                 onHealthChanged?.Invoke(health,maxHealth);
-                Debug.Log($"Health : {health}");
-                print(health);
+
+                Debug.Log($"Player damaged BY {damager}");
+                Debug.Log($"Player Health : {health}");
                 StartCoroutine(Damage());
                 if (health <= 0)
                 {
@@ -94,27 +110,35 @@ public class PlayerHealth : MonoBehaviour
     {
         print("PLayer is dead!!");
         isAlive = false;
-        _player.transform.position = respawnTransform.position;
+        _audioSource.clip = deathSound;
+        _audioSource.Play();
+        _characterController.enabled = false;
         StartCoroutine(Respawn());
+        onDeath?.Invoke();
+        
+        
     }
 
     private IEnumerator Damage()
     {
         _bloom.active = true;
-       // damageEffect.SetActive(true);
-
+        _audioSource.clip = heartedSound;
+        if (!_audioSource.isPlaying)
+        {
+            _audioSource.Play(); 
+        }
         yield return new WaitForSeconds(0.5f);
-
-        //damageEffect.SetActive(false);
         _bloom.active = false;
-
     }
 
     IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(2);
-        
+        _player.transform.position = afterDeathRespawnTransform.position;
+        yield return new WaitForSeconds(2);        
         health = maxHealth;
+        onRebirth?.Invoke();
+        onHealthChanged?.Invoke(health,maxHealth);
+        _characterController.enabled = true;
         isAlive = true;
     }
 }

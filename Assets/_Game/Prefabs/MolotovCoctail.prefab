@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b801cf3915ccc47bfd4cf3270dc7c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: 1
   selfExplodeTime: 10
   flamedFX: {fileID: 5719199452158463908}
   explosionDelay: 1
@@ -69,9 +69,10 @@ MonoBehaviour:
   showGizmos: 0
   explosionFX: {fileID: 3911684117428958394}
   explosionClip: {fileID: 8300000, guid: 5414f94c56e25344eb80a2ea213ccdb8, type: 3}
-  radius: 30
-  force: 2000
-  upForce: 20
+  radius: 2
+  force: 300
+  upForce: 5
+  isThisBurning: 1
   isExploding: 0
 --- !u!114 &350913520961805735
 MonoBehaviour:
