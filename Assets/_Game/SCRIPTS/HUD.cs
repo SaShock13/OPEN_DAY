@@ -33,7 +33,8 @@ public class HUD : MonoBehaviour
     private void Awake()
     {
         _canvas = GetComponent<Canvas>();
-		_canvas.worldCamera = _player.GetComponentInChildren<Camera>();
+        //_canvas.worldCamera = _player.GetComponentInChildren<Camera>();
+        _canvas.worldCamera = Camera.main;
         winSound = GetComponent<AudioSource>();
         winSound.clip = winClip;
         pausePanel.SetActive(false);

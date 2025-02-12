@@ -1929,6 +1929,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 5220317631898119092, guid: df104db20cf43c04e93fdc973d214e09,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5324841477955102260, guid: df104db20cf43c04e93fdc973d214e09,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -23,29 +23,28 @@ public class Hints : MonoBehaviour
         Right
     }
 
-    private ControllerHintsExample hintsController;
-
-    public SteamVR_Action actionForHint;
-    [SerializeField] private string hintText = "Нажмите X для открытия инвентаря,\nНажмите ещё раз , для его скрытия";
     [SerializeField] private SteamVR_Action_Boolean action = SteamVR_Input.GetBooleanAction("Inventory");
-    private string textToShow;
     [SerializeField] private HintType hintType = HintType.Walk;
-
-
-    // todo сделать текст подсказок константами и свич енумов 
-    private const string grabHintText = "Нажмите и удерживайте курок, чтобы держать предмет. \n С некоторыми предметами можно взаимодействовать, \n если при удержании курка нажать другой курок";
-
     [SerializeField] private Hands hand;
+    public SteamVR_Action actionForHint;
+
+    private ControllerHintsExample hintsController;
+    private string hintText;
+    private string textToShow;
+
+    private const string grabHintText = "Нажмите и удерживайте курок, чтобы держать предмет. \n С некоторыми предметами можно взаимодействовать, \n если при удержании курка нажать другой курок";
+    private const string turnHintText = "На правом контроллере джойстик в сторону -  \n Поворот влево - вправо";
+    private const string inventoryHintText = "Нажмите X для инвентаря";
+    private const string pauseHintText = "Нажмите Y для паузы";
+    private const string walkHintText = "На левом контроллере джойстик - перемещаться";
+
     private Hand hintHand;
     private SteamVR_Input_Sources input_Source;
-
     private float minHintTime = 1f;
     private bool skipHint = false;
     private Coroutine hintCoroutine;
     private ISteamVR_Action_In actionIn ;
-
     private bool isAlreadyShown = false; // Чтобы подсказка показывалась только один раз
-
 
     private void Start()
     {
@@ -62,33 +61,32 @@ public class Hints : MonoBehaviour
         actionIn = action;
         hintsController = GetComponent<ControllerHintsExample>();
         textToShow = hintText.ToString();
-
-        //todo проверить свич, либо ентер в самом тексте в редакторе, либо промежуточной присваивать переменной , а потом в UI
+                       
         switch (hintType)
         {
             case HintType.Walk:
-                hintText = grabHintText;
+                hintText = walkHintText;
                 break;
             case HintType.Turn:
-                hintText = grabHintText;
+                hintText = turnHintText;
                 break;
             case HintType.Grab:
                 hintText = grabHintText;
                 break;
             case HintType.Inventory:
-                hintText = grabHintText;
+                hintText = inventoryHintText;
                 break;
             case HintType.Pause:
-                hintText = grabHintText;
+                hintText = pauseHintText;
                 break;
             default:
                 break;
         }
-
     }
     private void Update()
     {
         bool isButtonPressed = action.GetStateDown(input_Source);
+
         if (isButtonPressed)
         {
             skipHint = true;
@@ -96,23 +94,10 @@ public class Hints : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            //hintsController.ShowTextHints(Player.instance.hands[0]);
-
             Debug.Log($"Pressed Q {this}");
             ControllerButtonHints.ShowTextHint(hintHand, actionIn, hintText);
         }
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    hintsController.ShowTextHints(Player.instance.hands[1]);
-        //}
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    hintsController.ShowButtonHints(Player.instance.hands[0]);
-        //}
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    hintsController.ShowButtonHints(Player.instance.hands[1]);
-        //}
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             hintsController.DisableHints();
@@ -121,24 +106,13 @@ public class Hints : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //hintsController.ShowTextHints(Player.instance.hands[0]);
-        //hintsController.ShowButtonHints(Player.instance.hands[1]);
         if (!isAlreadyShown && other.CompareTag("Player"))
         {
             if (hintCoroutine == null)
             {
                 hintCoroutine = StartCoroutine(ShowHintCoroutine(minHintTime));  
             }
-        }
-        
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        //if (other.CompareTag("Player"))
-        //{
-        //    TurnHintOff();
-        //}
+        }        
     }
 
     private void TurnHintOff()

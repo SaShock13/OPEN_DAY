@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: avaturn_body_material
-    second: {fileID: 2100000, guid: a5f1ccfcb2ed0c8488f3e9233dd35f0e, type: 2}
+    second: {fileID: 2100000, guid: 42d6755701c7ea541835da9743cbdf5f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: avaturn_hair_0_material
-    second: {fileID: 2100000, guid: 44578d42bffbf714c9cb3ac2e2d14d28, type: 2}
+    second: {fileID: 2100000, guid: 8b11b507105d0a64d9d91ded53118511, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

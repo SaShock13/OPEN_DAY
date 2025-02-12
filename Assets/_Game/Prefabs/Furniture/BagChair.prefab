@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5f117bbc917b76c4196980a47a9e3c23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.975006
+      value: -6.976
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f117bbc917b76c4196980a47a9e3c23,
         type: 3}
@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5f117bbc917b76c4196980a47a9e3c23,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.82963
+      value: -25.958
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f117bbc917b76c4196980a47a9e3c23,
         type: 3}
@@ -92,6 +92,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BagChair
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f117bbc917b76c4196980a47a9e3c23,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

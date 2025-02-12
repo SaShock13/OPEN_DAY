@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform testTargetTransform;
     private Transform currentTargetTransform;
     private PlayerHealth playerHealth;
+    private Collider capsuleCollider;
+
 
     private Player _player;
     private Animator animator;
@@ -62,6 +64,7 @@ public class Enemy : MonoBehaviour
         {
             rb.isKinematic = true;
         }
+        capsuleCollider = GetComponent<Collider>();
         playerTransform = _player.transform;
         playerHealth = _player.GetComponent<PlayerHealth>();
         agent = GetComponent<NavMeshAgent>();
@@ -220,8 +223,12 @@ public class Enemy : MonoBehaviour
     {
         foreach (var rb in rigidBodiesRagdoll)
         {
+            rb.angularDrag = 2;
+            rb.drag = 2;
             rb.isKinematic = false;
         }
+        capsuleCollider.GetComponent<Rigidbody>().isKinematic = true;
+        capsuleCollider.enabled = false;
         animator.enabled = false;
         currentRgdll.StopConvulsing();
         isAlive = false;

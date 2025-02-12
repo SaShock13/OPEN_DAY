@@ -62,14 +62,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8385234228743025303}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.067085505, y: -0.7039173, z: -0.7039173, w: 0.067085505}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0.419, z: 0}
   m_LocalScale: {x: 21.411, y: 21.897692, z: 0.6249999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8316349974698776450}
   m_Father: {fileID: 2593436901330904122}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 190.888}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!65 &1144975106619620048
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -358,8 +358,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 08db2c5c9cdeda74297e0c70930d86aa,
         type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 08db2c5c9cdeda74297e0c70930d86aa,
+        type: 3}
       propertyPath: m_LightProbeUsage
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 08db2c5c9cdeda74297e0c70930d86aa,
         type: 3}
@@ -370,6 +375,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08db2c5c9cdeda74297e0c70930d86aa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
