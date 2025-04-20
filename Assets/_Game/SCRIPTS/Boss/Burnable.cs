@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Burnable : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleSystem;
-    [SerializeField] private float burnInSeconds = 10f;
+    private float burnInSeconds = 10f;
     private EnemyHealth _enemyHealth;
     private BossSMMono stateMachine;
     
@@ -36,6 +36,8 @@ public class Burnable : MonoBehaviour
         yield return new WaitForSeconds(burnInSeconds/2);
         //stateMachine.SetState<BossDeathState>();
         _enemyHealth.Death();
+
+        Debug.Log($"Death Death {this}");
         yield return new WaitForSeconds(burnInSeconds/2);
         _particleSystem.Stop();
     }

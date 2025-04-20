@@ -12,14 +12,11 @@ public class CarActivation : MonoBehaviour
     public void Construct(CutScene cutScene)
     {
         _cutScene = cutScene;
-
-        Debug.Log($"Construct {_cutScene}");
     }
 
 
     public void StartCutScene()
     {
-        Debug.Log($"Start CutScene in {this}");
         _cutScene.StartCutScene();
     }
 }

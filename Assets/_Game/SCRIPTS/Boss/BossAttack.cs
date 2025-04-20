@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class BossAttack : MonoBehaviour
 {
     [SerializeField] GameObject doubleHandTrigger;
     [SerializeField] GameObject kickTrigger;
+    public event Action EndAttackEvent;
 
     private void Start()
     {
@@ -31,6 +33,10 @@ public class BossAttack : MonoBehaviour
         kickTrigger.SetActive(false);
     }
 
+    public void AnimationFinished()
+    {
+        EndAttackEvent?.Invoke();
+    }
 
     IEnumerator TurnTriggerOff(GameObject triggerObj,float time) // Выключение триггера На случай прерывания анимации
     {

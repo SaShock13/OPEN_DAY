@@ -34,7 +34,7 @@ public class PlayerMover : MonoBehaviour
         var moveDirection = moveSpeed * Time.deltaTime * (Vector3.ProjectOnPlane(lookDirection, Vector3.up)).normalized;
         characterController.Move(moveDirection - (new Vector3(0, 9.8f, 0) * Time.deltaTime));
         
-        //_volume.profile.TryGet(out _vignette);        
-        //_vignette.intensity.value = inputVector3.normalized.magnitude * vignetteCoeff;
+        _volume.profile.TryGet(out _vignette);        
+        _vignette.intensity.value = inputVector3.normalized.magnitude * vignetteCoeff;
     }
 }

@@ -11,14 +11,12 @@ public class WeaponCloseRange : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Some collision of weapon {this}");
         if (!isAttacking)
         {
             if (collision.gameObject.TryGetComponent<EnemyHealth>(out enemyHealth))
             {
                 isAttacking = true;
                 StartCoroutine(AttackPause());
-                Debug.Log($"EnemyHealth collision of weapon {this}");
                 enemyHealth.TakeDamage(damage);
             }
             else

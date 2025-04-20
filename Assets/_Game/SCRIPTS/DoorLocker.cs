@@ -11,7 +11,7 @@ public class DoorLocker : MonoBehaviour
     private void Start()
     {
         renderer = GetComponentInChildren<Renderer>();
-        DoorLockEvent?.Invoke();
+        //DoorLockEvent.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -31,8 +31,8 @@ public class PlayerHealthView : MonoBehaviour
         _health.onHealthChanged.AddListener(HealthChanged);
         _health.onDeath.AddListener(OnPlayerDeath);
         _health.onRebirth.AddListener(OnPlayerRebirth);
-
     }
+
     private void OnDestroy()
     {
         _health.onHealthChanged.RemoveListener(HealthChanged);
@@ -40,19 +40,10 @@ public class PlayerHealthView : MonoBehaviour
         _health.onRebirth.RemoveListener(OnPlayerRebirth);
     }
 
-    private void OnDisable()
-    {
-        //_health.onHealthChanged.RemoveListener(HealthChanged);
-        //_health.onDeath.RemoveListener(OnPlayerDeath);
-        //_health.onRebirth.RemoveListener(OnPlayerRebirth);
-    }
-
     public void HealthChanged(float health,float maxHealth)
     {
-        Debug.Log($"healthView reacted ");
         fxColor = heartedImage.color;
         fxColor.a = Mathf.Lerp(0,0.5f,1 - health/maxHealth);
-        Debug.Log($"Health {health}");
         heartedImage.color = fxColor;        
     }
 
@@ -60,7 +51,6 @@ public class PlayerHealthView : MonoBehaviour
     {
         fxColor = heartedImage.color;
         fxColor.a = 1;
-        Debug.Log($"Player HealthView On Death ");
         heartedImage.color = fxColor;
     }
 
@@ -68,7 +58,6 @@ public class PlayerHealthView : MonoBehaviour
     {
         fxColor = heartedImage.color;
         fxColor.a = 0;
-        Debug.Log($"Player HealthView On Rebirth ");
         heartedImage.color = fxColor;
     }
 }

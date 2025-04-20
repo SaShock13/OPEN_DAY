@@ -104,10 +104,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3432401550182100168, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9718853
+      objectReference: {fileID: 0}
+    - target: {fileID: -3432401550182100168, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.2348077
+      objectReference: {fileID: 0}
+    - target: {fileID: -3432401550182100168, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0026385775
+      objectReference: {fileID: 0}
+    - target: {fileID: -3432401550182100168, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0172463
+      objectReference: {fileID: 0}
+    - target: {fileID: -3432401550182100168, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -27.162
+      objectReference: {fileID: 0}
+    - target: {fileID: -3432401550182100168, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.191
+      objectReference: {fileID: 0}
+    - target: {fileID: -3432401550182100168, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -2.079
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: adb49ac44206ba049bbe704bf5ce569e,
         type: 3}
       propertyPath: m_Name
       value: ZombiegirlModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99968326
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0000012964009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000028202774
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.02516671
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: adb49ac44206ba049bbe704bf5ce569e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 2.884
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -307,8 +367,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.37315655, y: 0.283684, z: 0.27638134}
-  m_Center: {x: 0.00022917986, y: 0.08867444, z: -0.026047707}
+  m_Size: {x: 0.3129683, y: 0.22202367, z: 0.27638137}
+  m_Center: {x: -0.0083382735, y: 0.077663586, z: -0.026047703}
 --- !u!54 &1495372664793536584
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -411,18 +471,18 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -70
+    limit: -0.92152596
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 10
+    limit: 99.35101
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 50
+    limit: 77.38479
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
@@ -469,10 +529,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15169047
-  m_Height: 0.6067619
+  m_Radius: 0.060135454
+  m_Height: 0.5893453
   m_Direction: 1
-  m_Center: {x: 0, y: 0.30338094, z: 0}
+  m_Center: {x: 0.0025760701, y: 0.31208917, z: -0.01803618}
 --- !u!54 &8604737279181636856
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -677,10 +737,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.12256503
-  m_Height: 0.40855008
+  m_Radius: 0.0727225
+  m_Height: 0.4085501
   m_Direction: 1
-  m_Center: {x: 0, y: 0.20427504, z: 0}
+  m_Center: {x: 0.016441323, y: 0.20427501, z: -1.1539149e-10}
 --- !u!54 &6674675786626496535
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -779,10 +839,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1018002
-  m_Height: 0.509001
+  m_Radius: 0.039493322
+  m_Height: 0.48736015
   m_Direction: 1
-  m_Center: {x: 0, y: 0.2545005, z: 0}
+  m_Center: {x: -0.006482874, y: 0.2653209, z: 0.008029121}
 --- !u!54 &5121094529098342421
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -829,7 +889,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -90
+    limit: -127.333496
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
@@ -987,10 +1047,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15169106
-  m_Height: 0.60676426
+  m_Radius: 0.0583815
+  m_Height: 0.5892707
   m_Direction: 1
-  m_Center: {x: 0, y: 0.30338213, z: 0}
+  m_Center: {x: -0.006713448, y: 0.31212917, z: -0.017340947}
 --- !u!54 &866780765627207554
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1195,10 +1255,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.12256562
-  m_Height: 0.40855205
+  m_Radius: 0.07386527
+  m_Height: 0.40855208
   m_Direction: 1
-  m_Center: {x: 0, y: 0.20427603, z: 0}
+  m_Center: {x: -0.0102246, y: 0.20427603, z: -1.4723665e-10}
 --- !u!54 &7454988903769802947
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1553,22 +1613,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -70
+    limit: 79.05483
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 10
+    limit: 155.40103
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 50
+    limit: 78.26769
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 3
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1605,10 +1665,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.11041708
-  m_Height: 0.5520854
+  m_Radius: 0.038898658
+  m_Height: 0.53492
   m_Direction: 1
-  m_Center: {x: 0, y: 0.2760427, z: 0}
+  m_Center: {x: 0.009455091, y: 0.28462586, z: 0.010042934}
 --- !u!54 &5800632507577688297
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1646,7 +1706,7 @@ CharacterJoint:
   m_ConnectedBody: {fileID: 5520485690653211311}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: -1, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
@@ -1655,7 +1715,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -90
+    limit: -128.7798
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
@@ -1813,8 +1873,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.37315655, y: 0.26943004, z: 0.27653068}
-  m_Center: {x: -0.0000005662441, y: 0.13471504, z: -0.031267077}
+  m_Size: {x: 0.28771198, y: 0.26943, z: 0.25778818}
+  m_Center: {x: -0.0015702391, y: 0.13471504, z: 0.00027936467}
 --- !u!54 &7596582600750472995
 Rigidbody:
   m_ObjectHideFlags: 0

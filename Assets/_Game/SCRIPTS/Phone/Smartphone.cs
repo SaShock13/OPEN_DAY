@@ -8,24 +8,17 @@ using Zenject;
 
 public class Smartphone : MonoBehaviour
 {
-    public bool call = false;
-    private bool isCalling = false;
-    private bool isTalking = false;
-    private AudioSource phoneSound;
     [SerializeField] private AudioClip ringSound;
     [SerializeField] private AudioClip talkSound;
     [SerializeField] private GameObject inCallPanel;
     [SerializeField] private GameObject callPanel;
 
+    public bool call = false;
     public PhoneStateMachineMono machineMono;
 
-    //private DialogUI _dialogUI;
-
-    //[Inject]
-    //public void Construct(DialogUI dialogUI)
-    //{
-    //    _dialogUI = dialogUI;
-    //}
+    private bool isCalling = false;
+    private bool isTalking = false;
+    private AudioSource phoneSound;
 
     private void Start()
     {
@@ -35,11 +28,7 @@ public class Smartphone : MonoBehaviour
 
     public void Call()
     {
-        Debug.Log("Someone is Calling");
         inCallPanel.SetActive(true);
-        Debug.Log($"inCallPanel {inCallPanel != null}");
-        Debug.Log($"phonesound {phoneSound!=null}");
-        Debug.Log($"ringSound {ringSound != null}");
         phoneSound.clip = ringSound;
         phoneSound.loop = true;
         phoneSound.Play();
@@ -55,15 +44,12 @@ public class Smartphone : MonoBehaviour
     }
 
     public void AnswerCall()
-    {        
-        Debug.Log("Answer Call");
+    {       
         callPanel.SetActive(true);
         phoneSound.clip = talkSound;
         phoneSound.loop = false;
-        //_dialogUI.AddMessageToDialog(new UIDialogMessage("Здесь, здесь происходит что-то странное, ты должен приехать за мной и забрать меняя отсюда", 20));
         phoneSound.Play();
         StartCoroutine(TalkCoroutine());
-
     }
 
     public void StopTalk()
@@ -72,11 +58,9 @@ public class Smartphone : MonoBehaviour
         if(phoneSound.isPlaying)phoneSound.Stop();
     }
 
-
     IEnumerator TalkCoroutine()
     {
         yield return new WaitForSeconds(talkSound.length);
         machineMono.SetState<IddleState>();
-
     }
 }

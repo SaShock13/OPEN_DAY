@@ -30,7 +30,7 @@ public class Hints : MonoBehaviour
 
     private ControllerHintsExample hintsController;
     private string hintText;
-    private string textToShow;
+    public string textToShow;
 
     private const string grabHintText = "Нажмите и удерживайте курок, чтобы держать предмет. \n С некоторыми предметами можно взаимодействовать, \n если при удержании курка нажать другой курок";
     private const string turnHintText = "На правом контроллере джойстик в сторону -  \n Поворот влево - вправо";
@@ -60,7 +60,6 @@ public class Hints : MonoBehaviour
         } 
         actionIn = action;
         hintsController = GetComponent<ControllerHintsExample>();
-        textToShow = hintText.ToString();
                        
         switch (hintType)
         {
@@ -82,6 +81,7 @@ public class Hints : MonoBehaviour
             default:
                 break;
         }
+
     }
     private void Update()
     {
@@ -94,7 +94,6 @@ public class Hints : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log($"Pressed Q {this}");
             ControllerButtonHints.ShowTextHint(hintHand, actionIn, hintText);
         }
 

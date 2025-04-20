@@ -2235,7 +2235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleSystem: {fileID: 9018675219461438580}
-  burnInSeconds: 10
 --- !u!4 &920022792432696189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e3156483bf792f94cbc0fb4377ca1e6e,

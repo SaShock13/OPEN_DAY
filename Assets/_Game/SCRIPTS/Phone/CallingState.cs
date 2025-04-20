@@ -5,34 +5,22 @@ using Zenject;
 
 
 
-public class CallingState : PhoneState
+public class CallingState : State
 {    
     private Smartphone _smartphone;
 
-    
-    //public void Construct(Smartphone smartphone)
-    //{
-    //    _smartphone = smartphone;
-    //}
-
-
-
-    public CallingState(PhoneStateMachine stateMachine, Smartphone smartphone) : base(stateMachine)
+    public CallingState(StateMachine stateMachine, Smartphone smartphone) : base(stateMachine)
     {
         _smartphone = smartphone;
     }
 
     public override void Enter()
     {
-
-        Debug.Log($"Accessed to  {_smartphone.name}");
-        Debug.Log("Phone Calling Enter");
         _smartphone.Call();
     }
 
     public override void Exit()
     {
-        Debug.Log("Phone Calling Exit");
         _smartphone.StoptCall();
     }
 
@@ -46,6 +34,5 @@ public class CallingState : PhoneState
         {
             stateMachine.SetState<TalkState>();
         }
-        Debug.Log("Phone Calling Update");
     }
 }

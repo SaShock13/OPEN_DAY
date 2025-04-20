@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TalkState : PhoneState
+public class TalkState : State
 {
     private Smartphone _phone;            
-    public TalkState(PhoneStateMachine stateMachine, Smartphone phone) : base(stateMachine)
+    public TalkState(StateMachine stateMachine, Smartphone phone) : base(stateMachine)
     {
         _phone = phone;
     }

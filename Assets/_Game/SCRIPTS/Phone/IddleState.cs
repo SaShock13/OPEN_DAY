@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IddleState : PhoneState
+public class IddleState : State
 {
     private Smartphone phone;
-    public IddleState(PhoneStateMachine stateMachine, Smartphone phone) : base(stateMachine)
+    public IddleState(StateMachine stateMachine, Smartphone phone) : base(stateMachine)
     {
         this.phone = phone;
     }
 
     public override void Enter()
     {
-        Debug.Log("Phone Iddle Enter");
+        
     }
 
     public override void Exit()
     {
-        Debug.Log("Phone Iddle Exit");
+        
     }
 
     public override void Update()
@@ -26,6 +26,6 @@ public class IddleState : PhoneState
         {
             stateMachine.SetState<CallingState>();
         }
-        Debug.Log("Phone Iddle Update");
+        //Debug.Log("Phone Iddle Update");
     }
 }

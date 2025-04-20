@@ -62,21 +62,16 @@ public class PlayerHealth : MonoBehaviour
         TestingDamage();
         if(health<maxHealth&health>0)
         {
-            //AutoHealing();
+            AutoHealing();
         }
     }
 
     private void AutoHealing()
     {
         health += 1*Time.deltaTime*healingSpeed;
-
         onHealthChanged?.Invoke(health,maxHealth);
-        Debug.Log($"Player Healed to : {health}");
     }
 
-    /// <summary>
-    /// Для тестирования урона!!!
-    /// </summary>
     private void TestingDamage()
     {
         if (Input.GetKeyDown(KeyCode.H))
@@ -91,12 +86,8 @@ public class PlayerHealth : MonoBehaviour
         {
             if (damage > 0)
             {
-
                 health -= damage;
                 onHealthChanged?.Invoke(health,maxHealth);
-
-                Debug.Log($"Player damaged BY {damager}");
-                Debug.Log($"Player Health : {health}");
                 StartCoroutine(Damage());
                 if (health <= 0)
                 {
@@ -108,15 +99,12 @@ public class PlayerHealth : MonoBehaviour
 
     private void Death()
     {
-        print("PLayer is dead!!");
         isAlive = false;
         _audioSource.clip = deathSound;
         _audioSource.Play();
         _characterController.enabled = false;
         StartCoroutine(Respawn());
         onDeath?.Invoke();
-        
-        
     }
 
     private IEnumerator Damage()

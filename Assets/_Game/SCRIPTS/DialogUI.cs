@@ -52,18 +52,6 @@ public class DialogUI : MonoBehaviour
         messagesList.Add(message);
     }
 
-    //public void ShowDialog(UIDialogMessage message)
-    //{
-    //    messagesList.Add(message);
-    //    if (!isShowing)
-    //    {
-    //        StartCoroutine(ShowMessageCoroutine(message));
-    //    }
-
-    //}
-
-
-
     /// <summary>
     /// Воспроизводит по очереди все сообщения из списка, если они есть. в update ?
     /// </summary>
@@ -76,7 +64,6 @@ public class DialogUI : MonoBehaviour
         dialogMessage.text = message.message;
         yield return new WaitForSeconds(message.showingTime);
         messagesList.Remove(message);
-        Debug.Log($"Сообщений в очереди осталось {messagesList.Count}");
         isShowing = false;
     }
 }

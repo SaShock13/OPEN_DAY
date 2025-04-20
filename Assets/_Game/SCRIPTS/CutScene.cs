@@ -15,22 +15,19 @@ public class CutScene : MonoBehaviour
     [SerializeField] private Transform univerPlayerTransform;
     [SerializeField] private Transform homePlayerTransform;
     [SerializeField] private Vector3 carPositionOffset;
+
     private Vector3 targetPlayerPosition;
     private Player _player;
     private CarActivation _carActivation;
     private bool isPlayerAtHome = true;
     private CircularDrive doorCircular;
 
-
     [Inject]
     public void Construct(Player player,CarActivation carActivation)
     {
         _player = player;
-
-        Debug.Log($"Player injected in CarCutScene {this}");
         _carActivation = carActivation;
     }
-
 
     private void Start()
     {
@@ -46,46 +43,30 @@ public class CutScene : MonoBehaviour
             StartCutScene();
         }
     }
-
     public void StartCutScene()
     {
         fadeAnimator.SetTrigger("FadeIn");
     }
-
     public void StartVideo()
     {
         StartCoroutine(StartVideoCoroutine());
     }
-
     private void StopCutScene()
     {
         fadeAnimator.SetTrigger("FadeOut");
         isForcedStart = false;
     }
-
-
-
     IEnumerator StartVideoCoroutine()
     {        
         targetPlayerPosition = isPlayerAtHome?univerPlayerTransform.position:homePlayerTransform.position;
         _player.GetComponent<CharacterController>().enabled = false;
         _player.transform.position = targetPlayerPosition;
         _player.GetComponent<CharacterController>().enabled = true;
-        //Player.instance.transform.position = targetPlayerPosition;
-        Debug.Log($"PLayer new position {_player.transform.position}");
         _carActivation.transform.position = targetPlayerPosition + carPositionOffset;
         isPlayerAtHome = !isPlayerAtHome;
         yield return new WaitForSeconds(cutSceneDuration);
         DoorToStart();
         StopCutScene();
-        //rawImage.enabled = true;
-        //videoPlayer.enabled = true;
-        //videoPlayer.Play();
-        //yield return new WaitForSeconds(cutSceneDuration);
-        //StopCutScene();
-        //rawImage.enabled = false;
-        //videoPlayer.Stop();
-        //videoPlayer.enabled = false;
     }
 
     private void DoorToStart()
@@ -94,7 +75,5 @@ public class CutScene : MonoBehaviour
         doorRotation =  Quaternion.Euler( new Vector3( doorRotation.x,doorCircular.startAngle,doorRotation.z));
         doorCircular.transform.localRotation = doorRotation;
         doorCircular.outAngle = doorCircular.startAngle;
-    }
-
-   
+    }   
 }

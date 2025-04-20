@@ -5,7 +5,7 @@ using Zenject;
 
 public class PhoneStateMachineMono : MonoBehaviour
 {
-    private PhoneStateMachine _stateMachine;
+    private StateMachine _stateMachine;
     private Smartphone _smartphone;
 
 
@@ -19,7 +19,7 @@ public class PhoneStateMachineMono : MonoBehaviour
 
     private void Start()
     {
-        _stateMachine = new PhoneStateMachine();
+        _stateMachine = new StateMachine();
 
         _stateMachine.AddState(new IddleState(_stateMachine, _smartphone));
         _stateMachine.AddState(new CallingState(_stateMachine, _smartphone));
@@ -36,7 +36,7 @@ public class PhoneStateMachineMono : MonoBehaviour
     }
 
 
-    public void SetState<T>() where T : PhoneState
+    public void SetState<T>() where T : State
     {
         _stateMachine.SetState<T>();
     }

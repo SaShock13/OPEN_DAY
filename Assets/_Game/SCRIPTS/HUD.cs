@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
@@ -43,9 +44,10 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
-        _pausePressed = _player != null && _player.leftHand != null ? 
-            pauseAction.GetStateDown(_player.leftHand.handType) || Input.GetKeyDown(KeyCode.P) : 
-            Input.GetKeyDown(KeyCode.P);
+        bool pauseInput =
+        _player != null && _player.leftHand != null ?
+        pauseAction.GetStateDown(_player.leftHand.handType) || Input.GetKeyDown(KeyCode.P) :
+        Input.GetKeyDown(KeyCode.P);
 
 
         if (_winned)
@@ -59,23 +61,31 @@ public class HUD : MonoBehaviour
             }
         }
 
-
-        if (_pausePressed )
+        if (_player.leftHand !=null && pauseAction.GetStateDown(_player.leftHand.handType))
         {
-            if (!_paused)
-            {
-                _paused = true;
-                Time.timeScale = 0f;
-                pausePanel.SetActive(true); 
-            }
-            else
-            {
-                _paused = false;
-                Time.timeScale = 1f;
-                _pausePressed = false;
-                pausePanel.SetActive(false);
-            }
+            Debug.Log($"PAuse!!!! {this}");
+            _paused = true;
+            Time.timeScale = 0f;
+            pausePanel.SetActive(true);
         }
+        if (_player.leftHand != null && pauseAction.GetStateUp(_player.leftHand.handType))
+        {
+            Debug.Log($"UnPause!!!! {this}");
+            _paused = false;
+            Time.timeScale = 1f;
+            pausePanel.SetActive(false);
+        }
+
+
+
+        //// todo со второго раза Проверить на шлеме!!!
+        //if (pauseInput)
+        //{
+        //    Debug.Log($"PAuse!!!! {this}");
+        //    _paused = !_paused;
+        //    Time.timeScale = _paused ? 0f : 1f;
+        //    pausePanel.SetActive(_paused);
+        //}
     }
 
     public void OnWinGame()

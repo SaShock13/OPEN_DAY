@@ -7,20 +7,14 @@ using Zenject;
 
 public class PLayerLevelSpawn : MonoBehaviour
 {
-    Player _player;
-    
+    Player _player;    
 
     [Inject]
     public void Construct(Player player)
     {
         var _playerrr = player;
-
-        Debug.Log($"inject type {_playerrr}");
         _player = player;
-        Debug.Log($"inject type {_player}");
     }
-
-
     
     private void Awake()
     {
@@ -32,12 +26,6 @@ public class PLayerLevelSpawn : MonoBehaviour
     {
         _player.GetComponentInChildren<SteamVR_LaserPointer>().pointer.GetComponent<Renderer>().enabled = false;
         
-    }
-
-    private void Update()
-    {
-
-        //Debug.Log($"_player.transform.position {_player.transform.position}");
     }
 
 }

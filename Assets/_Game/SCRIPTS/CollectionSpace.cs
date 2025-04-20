@@ -34,13 +34,12 @@ public class CollectionSpace : MonoBehaviour
             if(other.TryGetComponent<FlamableMixComponent>(out flamableMixComponent))
             {
 
+                Debug.Log($"Conponent {this}");
                 Debug.Log($"Conponent {flamableMixComponent.id} is collected ");
                 flamableMixArray[flamableMixComponent.id] = flamableMixComponent;
                 if (IsCompleted())
                 {
                     isQuestCompleted = true;
-
-                    Debug.Log($"Quest completed");
                     nextPhaseEvent?.Invoke();
                 } else onComponentAdded?.Invoke();
             }
@@ -53,7 +52,6 @@ public class CollectionSpace : MonoBehaviour
         {
             if (flamableMixArray[i] == null)
             {
-                Debug.Log($"Quest NOT Yet completed ");
                 return false;
 
             }
