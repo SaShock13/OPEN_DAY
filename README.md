@@ -1,1 +1,1 @@
-# OPEN_DAY
+# VR shooter game for the SteamVR platform (tested on Oculus Quest 2).
